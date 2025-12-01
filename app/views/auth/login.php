@@ -55,6 +55,9 @@
                         <i class="fas fa-sign-in-alt mr-2"></i>Login
                     </button>
                 </form>
+        class="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 rounded-lg font-semibold hover:bg-gray-700 transition">
+    <i class="fas fa-sign-in-alt mr-2"></i>Login
+                    /button>
 
                 <div class="text-center mt-6">
                     <a href="<?= BASE_URL ?>" class="text-primary hover:text-blue-700">
