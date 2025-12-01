@@ -58,7 +58,7 @@
         <div class="p-6 border-b">
             <h3 class="text-xl font-bold flex items-center justify-between">
                 Recent Projects
-                <a href="<?= BASE_URL ?>/project/create" class="text-sm bg-primary text-white px-4 py-2 rounded hover:bg-blue-700">
+                <a href="<?= BASE_URL ?>/admin/projects/create" class="text-sm bg-primary text-white px-4 py-2 rounded hover:bg-blue-700">
                     <i class="fas fa-plus mr-1"></i>Add New
                 </a>
             </h3>
@@ -72,7 +72,7 @@
                                 <h4 class="font-semibold"><?= $project['title'] ?></h4>
                                 <p class="text-sm text-gray-500"><?= $project['category'] ?></p>
                             </div>
-                            <a href="<?= BASE_URL ?>/project/edit/<?= $project['id'] ?>" class="text-primary hover:text-blue-700">
+                            <a href="<?= BASE_URL ?>/admin/projects/edit/<?= $project['id'] ?>" class="text-primary hover:text-blue-700">
                                 <i class="fas fa-edit"></i>
                             </a>
                         </div>
