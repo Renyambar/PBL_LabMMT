@@ -10,9 +10,13 @@ class App
     {
         $url = $this->parseUrl();
 
+        // Store controller name before instantiation
+        $controllerName = $this->controller;
+
         // Check if controller exists
         if (isset($url[0]) && file_exists('../app/controllers/' . ucfirst($url[0]) . 'Controller.php')) {
-            $this->controller = ucfirst($url[0]) . 'Controller';
+            $controllerName = ucfirst($url[0]) . 'Controller';
+            $this->controller = $controllerName;
             unset($url[0]);
         }
 
@@ -22,13 +26,34 @@ class App
 
         // Check if method exists
         if (isset($url[1])) {
-            if (method_exists($this->controller, $url[1])) {
-                $this->method = $url[1];
-                unset($url[1]);
+            // Check if this is admin panel for composite routes
+            $isAdmin = (strtolower($controllerName) === 'admincontroller');
+            
+            if ($isAdmin && isset($url[2])) {
+                // For admin panel, support nested routes like admin/projects/create
+                // Convert to method name: projects_create
+                $compositeMethod = $url[1] . '_' . $url[2];
+                if (method_exists($this->controller, $compositeMethod)) {
+                    $this->method = $compositeMethod;
+                    unset($url[1]);
+                    unset($url[2]);
+                } else {
+                    // If composite method doesn't exist, try normal method
+                    if (method_exists($this->controller, $url[1])) {
+                        $this->method = $url[1];
+                        unset($url[1]);
+                    }
+                }
+            } else {
+                // Normal route: controller/method
+                if (method_exists($this->controller, $url[1])) {
+                    $this->method = $url[1];
+                    unset($url[1]);
+                }
             }
         }
 
-        // Get params
+        // Get remaining params
         $this->params = $url ? array_values($url) : [];
 
         // Call controller method with params
