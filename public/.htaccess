@@ -1,7 +1,7 @@
 # Rewrite engine for clean URLs
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /Lab-MMT/public/
+    RewriteBase /PBL_LabMMT/public/
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
