@@ -1,5 +1,4 @@
 <?php
-
 class AuthController extends Controller
 {
     private $userModel;
@@ -41,7 +40,7 @@ class AuthController extends Controller
                 $_SESSION['user_email'] = $user['email'];
                 $_SESSION['role'] = $user['role'];
 
-                $this->redirect('admin');
+                $this->redirect('admin/dashboard');
             } else {
                 $_SESSION['error'] = 'Email atau password salah!';
                 $this->redirect('auth/login');
@@ -50,6 +49,8 @@ class AuthController extends Controller
             $this->redirect('auth/login');
         }
     }
+
+    
 
     // Logout
     public function logout()
