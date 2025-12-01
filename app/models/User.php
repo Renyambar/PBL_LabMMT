@@ -9,7 +9,7 @@ class User
         $this->db = new Database();
     }
 
-    // Select User
+    // Get all users
     public function getAll()
     {
         $query = "SELECT id, name, email, role, created_at FROM users ORDER BY created_at DESC";
