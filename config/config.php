@@ -12,4 +12,6 @@ define('BASE_URL', 'http://localhost/Lab-MMT/public');
 define('APP_NAME', 'Portal Showcase Lab MMT');
 
 // Session Configuration
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
