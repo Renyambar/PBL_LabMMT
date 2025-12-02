@@ -1,20 +1,41 @@
-<?php require_once '../app/views/layouts/header.php'; ?>
+<?php 
+require_once '../app/views/layouts/header.php'; 
+
+$showAll = isset($_GET['show']) && $_GET['show'] == 'all';
+$articlesPerPage = 9;
+
+// Pastikan $articles adalah array
+if (!isset($articles) || !is_array($articles)) {
+    $articles = [];
+}
+
+$totalArticles = count($articles);
+
+if ($showAll) {
+    $articlesToShow = $articles;
+} else {
+    $articlesToShow = array_slice($articles, 0, $articlesPerPage);
+}
+
+$hasMore = $totalArticles > $articlesPerPage;
+?>
 
 <!-- Page Header -->
-<section class="bg-gradient-to-r from-primary to-secondary text-white py-16">
+<section class="text-white py-20 bg-[linear-gradient(90deg,#0A2A78,#1E4DB8,#2D72F0)]">
     <div class="container mx-auto px-4">
-        <h1 class="text-4xl font-bold mb-4">Artikel & Berita</h1>
-        <p class="text-xl">Update kegiatan dan publikasi Lab MMT</p>
+        <h1 class="text-5xl font-bold mb-3">Artikel & Berita</h1>
+        <p class="text-xl opacity-90">Update kegiatan dan publikasi Lab MMT</p>
     </div>
 </section>
 
 <!-- Search Section -->
-<section class="py-8 bg-gray-100">
+<section class="py-8 bg-gray-50">
     <div class="container mx-auto px-4">
         <form action="<?= BASE_URL ?>/article" method="GET" class="flex max-w-2xl mx-auto">
-            <input type="text" name="search" placeholder="Cari artikel..." value="<?= $search ?? '' ?>" 
-                   class="px-4 py-3 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary flex-1">
-            <button type="submit" class="bg-primary text-white px-8 py-3 rounded-r-lg hover:bg-blue-700 transition">
+            <input type="text" name="search" placeholder="Cari artikel..."
+                   value="<?= $search ?? '' ?>"
+                   class="px-4 py-3 border border-gray-300 rounded-l-lg focus:ring-blue-600 flex-1">
+            <button type="submit" class="bg-blue-600 text-white px-8 py-3 rounded-r-lg hover:bg-blue-700 transition">
                 <i class="fas fa-search mr-2"></i>Search
             </button>
         </form>
@@ -22,44 +43,64 @@
 </section>
 
 <!-- Articles Grid -->
-<section class="py-16">
-    <div class="container mx-auto px-4">
-        <?php if (!empty($articles)): ?>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <?php foreach ($articles as $article): ?>
-                    <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
-                        <div class="h-48 bg-gray-300">
-                            <?php if ($article['thumbnail']): ?>
-                                <img src="<?= BASE_URL ?>/assets/img/<?= $article['thumbnail'] ?>" alt="<?= $article['title'] ?>" class="w-full h-full object-cover">
-                            <?php else: ?>
-                                <div class="flex items-center justify-center h-full">
-                                    <i class="fas fa-newspaper text-gray-400 text-5xl"></i>
-                                </div>
-                            <?php endif; ?>
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-7xl">
+
+        <?php if (!empty($articlesToShow)): ?>
+
+            <!-- GRID: responsive 1 / 2 / 3 kolom -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <?php foreach ($articlesToShow as $article): ?>
+                    <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 hover:-translate-y-1">
+
+                        <!-- Image-->
+                        <div class="h-48 relative overflow-hidden">
+                            <img src="/Lab-MMT/public/assets/img/articles/articles-proto.jpg"
+                                 alt="" class="w-full h-full object-cover" style="object-position: center 10%;">
                         </div>
+
+                        <!-- Content -->
                         <div class="p-6">
-                            <div class="flex items-center text-sm text-gray-500 mb-3">
-                                <i class="fas fa-calendar mr-2"></i>
-                                <?= date('d M Y', strtotime($article['created_at'])) ?>
+                            <!-- Date and Author -->
+                            <div class="text-sm text-gray-500 flex items-center mb-3">
+                                <i class="fas fa-calendar text-gray-400 mr-2"></i><?= date('d M Y', strtotime($article['created_at'])) ?>
                                 <span class="mx-2">•</span>
-                                <i class="fas fa-user mr-2"></i>
-                                <?= $article['author_name'] ?>
+                                <i class="fas fa-user text-gray-400 mr-2"></i><?= $article['author_name'] ?>
                             </div>
-                            <h3 class="text-xl font-bold mb-3"><?= $article['title'] ?></h3>
-                            <p class="text-gray-600 mb-4 line-clamp-3"><?= substr(strip_tags($article['content']), 0, 150) ?>...</p>
-                            <a href="<?= BASE_URL ?>/article/detail/<?= $article['slug'] ?>" class="text-primary hover:text-blue-700 font-semibold">
-                                Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i>
+
+                            <!-- Title -->
+                            <h3 class="text-xl font-bold mb-3 text-gray-800 hover:text-blue-700 transition">
+                                <?= $article['title']; ?>
+                            </h3>
+
+                            <!-- Excerpt -->
+                            <p class="text-gray-600 mb-4 line-clamp-3">
+                                <?= substr(strip_tags($article['content']), 0, 120); ?>...
+                            </p>
+
+                            <!-- Read More Link -->
+                            <a href="<?= BASE_URL ?>/article/detail/<?= $article['slug'] ?>"
+                               class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition">
+                                Baca Selengkapnya <i class="fas fa-arrow-right ml-2"></i>
                             </a>
                         </div>
                     </article>
                 <?php endforeach; ?>
             </div>
-        <?php else: ?>
-            <div class="text-center py-16">
-                <i class="fas fa-newspaper text-gray-400 text-6xl mb-4"></i>
-                <p class="text-gray-500 text-xl">Tidak ada artikel ditemukan</p>
+
+            <!-- Lihat Semua Berita Button -->
+            <div class="text-center mt-12">
+                <a href="<?= BASE_URL ?>/article?show=all<?= isset($search) && $search !== '' ? '&search='.urlencode($search) : '' ?>"
+                    class="inline-block bg-blue-600 text-white px-10 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+                        Lihat Semua Berita
+                </a>
             </div>
+            
+
+        <?php else: ?>
+            <div class="text-center py-20 text-gray-500">Tidak ada artikel ditemukan.</div>
         <?php endif; ?>
+
     </div>
 </section>
 
