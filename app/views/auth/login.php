@@ -12,7 +12,9 @@
         <div class="max-w-md mx-auto bg-white rounded-lg shadow-2xl overflow-hidden">
             <div class="bg-primary text-white p-8 text-center">
                 <i class="fas fa-flask text-5xl mb-4"></i>
-                <h1 class="text-3xl font-bold">Lab MMT Portal</h1>
+                <div class="flex justify-center mb-4">
+                    <img src="<?= BASE_URL ?>/assets/img/favicon.ico" alt="Lab MMT Mascot" class="w-32 h-auto">
+                </div>
                 <p class="text-blue-100">Content Management System</p>
             </div>
 
@@ -51,13 +53,10 @@
                     </div>
 
                     <button type="submit" 
-                            class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+                            class="w-full bg-blue-700 text-white py-3 rounded-lg font-semibold hover:bg-blue-900 transition">
                         <i class="fas fa-sign-in-alt mr-2"></i>Login
                     </button>
                 </form>
-        class="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 rounded-lg font-semibold hover:bg-gray-700 transition">
-    <i class="fas fa-sign-in-alt mr-2"></i>Login
-                    /button>
 
                 <div class="text-center mt-6">
                     <a href="<?= BASE_URL ?>" class="text-primary hover:text-blue-700">
