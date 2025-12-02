@@ -1,21 +1,21 @@
-<?php $page_title = 'Manage Articles'; require_once '../app/views/layouts/admin_header.php'; ?>
+<?php $page_title = 'Kelola Artikel'; require_once '../app/views/layouts/admin_header.php'; ?>
 
 <div class="flex justify-between items-center mb-6">
-    <h2 class="text-2xl font-bold">Articles Management</h2>
+    <h2 class="text-2xl font-bold">Pengelolaan Artikel</h2>
     <a href="<?= BASE_URL ?>/admin/articles/create" class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
-        <i class="fas fa-plus mr-2"></i>Add New Article
+        <i class="fas fa-plus mr-2"></i>Tambah Artikel
     </a>
 </div>
 
 <!-- Search -->
 <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
     <form method="GET" class="flex gap-4">
-        <input type="text" name="search" placeholder="Search articles..." 
+        <input type="text" name="search" placeholder="Cari artikel..." 
                value="<?= $_GET['search'] ?? '' ?>"
                class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
         
         <button type="submit" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-blue-700">
-            <i class="fas fa-search mr-2"></i>Search
+            <i class="fas fa-search mr-2"></i>Cari
         </button>
     </form>
 </div>
@@ -26,10 +26,10 @@
         <thead class="bg-gray-50">
             <tr>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Thumbnail</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Author</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Published</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Judul</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Penulis</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Diterbitkan</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
             </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
@@ -60,12 +60,12 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                             <a href="<?= BASE_URL ?>/admin/articles/edit/<?= $article['id'] ?>" 
                                class="text-indigo-600 hover:text-indigo-900 mr-3">
-                                <i class="fas fa-edit"></i> Edit
+                                <i class="fas fa-edit"></i> Ubah
                             </a>
                             <a href="<?= BASE_URL ?>/admin/articles/delete/<?= $article['id'] ?>" 
-                               onclick="return confirm('Are you sure you want to delete this article?')"
+                               onclick="return confirm('Apakah Anda yakin ingin menghapus artikel ini?')"
                                class="text-red-600 hover:text-red-900">
-                                <i class="fas fa-trash"></i> Delete
+                                <i class="fas fa-trash"></i> Hapus
                             </a>
                         </td>
                     </tr>
@@ -74,9 +74,9 @@
                 <tr>
                     <td colspan="5" class="px-6 py-12 text-center text-gray-500">
                         <i class="fas fa-file-alt text-6xl mb-4 text-gray-300"></i>
-                        <p class="text-lg">No articles found</p>
+                        <p class="text-lg">Tidak ada artikel ditemukan</p>
                         <a href="<?= BASE_URL ?>/admin/articles/create" class="text-primary hover:underline mt-2 inline-block">
-                            Write your first article
+                            Tulis artikel pertama Anda
                         </a>
                     </td>
                 </tr>
