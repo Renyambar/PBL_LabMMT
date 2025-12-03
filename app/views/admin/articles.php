@@ -1,7 +1,7 @@
 <?php $page_title = 'Kelola Artikel'; require_once '../app/views/layouts/admin_header.php'; ?>
 
 <div class="flex justify-between items-center mb-6">
-    <h2 class="text-2xl font-bold">Pengelolaan Artikel</h2>
+    <h2 class="text-2xl font-bold">Manajemen Artikel</h2>
     <a href="<?= BASE_URL ?>/admin/articles/create" class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
         <i class="fas fa-plus mr-2"></i>Tambah Artikel
     </a>

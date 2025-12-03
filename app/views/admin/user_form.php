@@ -1,13 +1,13 @@
-<?php $page_title = isset($user) ? 'Edit User' : 'Create User'; require_once '../app/views/layouts/admin_header.php'; ?>
+<?php $page_title = isset($user) ? 'Ubah Pengguna' : 'Buat Pengguna'; require_once '../app/views/layouts/admin_header.php'; ?>
 
 <div class="mb-6">
     <a href="<?= BASE_URL ?>/admin/users" class="text-primary hover:text-blue-700">
-        <i class="fas fa-arrow-left mr-2"></i>Back to Users
+        <i class="fas fa-arrow-left mr-2"></i>Kembali ke Pengguna
     </a>
 </div>
 
 <div class="bg-white rounded-lg shadow-lg p-8">
-    <h2 class="text-2xl font-bold mb-6"><?= isset($user) ? 'Edit' : 'Create New' ?> User</h2>
+    <h2 class="text-2xl font-bold mb-6"><?= isset($user) ? 'Ubah' : 'Buat' ?> Pengguna</h2>
 
     <form action="<?= isset($user) ? BASE_URL . '/admin/users/update/' . $user['id'] : BASE_URL . '/admin/users/store' ?>" 
           method="POST">
@@ -16,33 +16,33 @@
             <!-- Name -->
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">
-                    <i class="fas fa-user mr-2"></i>Full Name *
+                    <i class="fas fa-user mr-2"></i>Nama Lengkap *
                 </label>
                 <input type="text" name="name" required
                        value="<?= $user['name'] ?? '' ?>"
                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                       placeholder="Enter full name">
+                       placeholder="Masukkan nama lengkap">
             </div>
 
             <!-- Email -->
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">
-                    <i class="fas fa-envelope mr-2"></i>Email Address *
+                    <i class="fas fa-envelope mr-2"></i>Alamat Email *
                 </label>
                 <input type="email" name="email" required
                        value="<?= $user['email'] ?? '' ?>"
                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                       placeholder="Enter email address">
+                       placeholder="Masukkan alamat email">
             </div>
 
             <!-- Role -->
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">
-                    <i class="fas fa-shield-alt mr-2"></i>Role *
+                    <i class="fas fa-shield-alt mr-2"></i>Peran *
                 </label>
                 <select name="role" required
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
-                    <option value="">Select Role</option>
+                    <option value="">Pilih Peran</option>
                     <option value="admin" <?= (($user['role'] ?? '') == 'admin') ? 'selected' : '' ?>>Administrator</option>
                     <option value="editor" <?= (($user['role'] ?? '') == 'editor') ? 'selected' : '' ?>>Editor</option>
                 </select>
@@ -51,22 +51,22 @@
             <!-- Password -->
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">
-                    <i class="fas fa-lock mr-2"></i>Password <?= isset($user) ? '(Leave empty to keep current)' : '*' ?>
+                    <i class="fas fa-lock mr-2"></i>Password <?= isset($user) ? '(Kosongkan untuk tetap menggunakan yang lama)' : '*' ?>
                 </label>
                 <input type="password" name="password" <?= !isset($user) ? 'required' : '' ?>
                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                       placeholder="Enter password">
+                       placeholder="Masukkan password">
             </div>
 
             <?php if (!isset($user)): ?>
             <!-- Password Confirmation -->
             <div class="md:col-span-2">
                 <label class="block text-gray-700 font-semibold mb-2">
-                    <i class="fas fa-lock mr-2"></i>Confirm Password *
+                    <i class="fas fa-lock mr-2"></i>Konfirmasi Password *
                 </label>
                 <input type="password" name="password_confirmation" required
                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                       placeholder="Confirm password">
+                       placeholder="Konfirmasi password">
             </div>
             <?php endif; ?>
         </div>
@@ -75,11 +75,11 @@
         <div class="flex justify-end gap-4 mt-8">
             <a href="<?= BASE_URL ?>/admin/users" 
                class="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
-                Cancel
+                Batal
             </a>
             <button type="submit" 
                     class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
-                <i class="fas fa-save mr-2"></i><?= isset($user) ? 'Update' : 'Create' ?> User
+                <i class="fas fa-save mr-2"></i><?= isset($user) ? 'Update' : 'Buat' ?> Pengguna
             </button>
         </div>
     </form>

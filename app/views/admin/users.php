@@ -1,9 +1,9 @@
-<?php $page_title = 'Manage Users'; require_once '../app/views/layouts/admin_header.php'; ?>
+<?php $page_title = 'Kelola Pengguna'; require_once '../app/views/layouts/admin_header.php'; ?>
 
 <div class="flex justify-between items-center mb-6">
-    <h2 class="text-2xl font-bold">Users Management</h2>
+    <h2 class="text-2xl font-bold">Manajemen Pengguna</h2>
     <a href="<?= BASE_URL ?>/admin/users/create" class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
-        <i class="fas fa-user-plus mr-2"></i>Add New User
+        <i class="fas fa-user-plus mr-2"></i>Tambah Pengguna Baru
     </a>
 </div>
 
@@ -12,11 +12,11 @@
     <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
             <tr>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Joined</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Peran</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bergabung</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
             </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
@@ -50,16 +50,16 @@
                             <?php if ($user['id'] != $_SESSION['user_id']): ?>
                                 <a href="<?= BASE_URL ?>/admin/users/edit/<?= $user['id'] ?>" 
                                    class="text-indigo-600 hover:text-indigo-900 mr-3">
-                                    <i class="fas fa-edit"></i> Edit
+                                    <i class="fas fa-edit"></i> Ubah
                                 </a>
                                 <a href="<?= BASE_URL ?>/admin/users/delete/<?= $user['id'] ?>" 
-                                   onclick="return confirm('Are you sure you want to delete this user?')"
+                                   onclick="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?')"
                                    class="text-red-600 hover:text-red-900">
-                                    <i class="fas fa-trash"></i> Delete
+                                    <i class="fas fa-trash"></i> Hapus
                                 </a>
                             <?php else: ?>
                                 <span class="text-gray-400">
-                                    <i class="fas fa-user-check"></i> Current User
+                                    <i class="fas fa-user-check"></i> Pengguna Saat Ini
                                 </span>
                             <?php endif; ?>
                         </td>
@@ -69,7 +69,7 @@
                 <tr>
                     <td colspan="5" class="px-6 py-12 text-center text-gray-500">
                         <i class="fas fa-users text-6xl mb-4 text-gray-300"></i>
-                        <p class="text-lg">No users found</p>
+                        <p class="text-lg">Tidak ada pengguna ditemukan</p>
                     </td>
                 </tr>
             <?php endif; ?>

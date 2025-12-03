@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Comments - Lab MMT Admin</title>
+    <title>Kelola Komentar - Lab MMT Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
@@ -25,7 +25,7 @@
     <div class="container mx-auto px-4 py-8">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-bold text-gray-800">
-                <i class="fas fa-comments mr-2 text-primary"></i>Manage Comments
+                <i class="fas fa-comments mr-2 text-primary"></i>Kelola Komentar
             </h1>
         </div>
 
@@ -48,11 +48,11 @@
             <div class="flex border-b">
                 <a href="<?= BASE_URL ?>/admin/comments" 
                    class="px-6 py-3 <?= !isset($_GET['filter']) || $_GET['filter'] == 'all' ? 'border-b-2 border-primary text-primary font-semibold' : 'text-gray-600 hover:text-primary' ?>">
-                    <i class="fas fa-list mr-2"></i>All Comments (<?= count($comments) ?>)
+                    <i class="fas fa-list mr-2"></i>Semua Komentar (<?= count($comments) ?>)
                 </a>
                 <a href="<?= BASE_URL ?>/admin/comments?filter=pending" 
                    class="px-6 py-3 <?= isset($_GET['filter']) && $_GET['filter'] == 'pending' ? 'border-b-2 border-primary text-primary font-semibold' : 'text-gray-600 hover:text-primary' ?>">
-                    <i class="fas fa-clock mr-2"></i>Pending 
+                    <i class="fas fa-clock mr-2"></i>Tertunda 
                     <?php 
                     $pending_count = 0;
                     foreach($comments as $comment) {
@@ -72,11 +72,11 @@
                 <thead class="bg-gray-50">
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Project</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contributor</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Comment</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Proyek</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kontributor</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Komentar</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -84,7 +84,7 @@
                         <tr>
                             <td colspan="6" class="px-6 py-8 text-center text-gray-500">
                                 <i class="fas fa-inbox text-4xl mb-2"></i>
-                                <p>No comments found.</p>
+                                <p>Tidak ada komentar ditemukan.</p>
                             </td>
                         </tr>
                     <?php else: ?>
@@ -98,11 +98,11 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <?php if ($comment['is_approved']): ?>
                                         <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                            <i class="fas fa-check-circle mr-1"></i>Approved
+                                            <i class="fas fa-check-circle mr-1"></i>Disetujui
                                         </span>
                                     <?php else: ?>
                                         <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                                            <i class="fas fa-clock mr-1"></i>Pending
+                                            <i class="fas fa-clock mr-1"></i>Tertunda
                                         </span>
                                     <?php endif; ?>
                                 </td>

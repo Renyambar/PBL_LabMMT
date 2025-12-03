@@ -5,7 +5,7 @@
     <div class="bg-white rounded-lg shadow-lg p-6">
         <div class="flex items-center justify-between">
             <div>
-                <p class="text-gray-500 text-sm mb-1">Total Projects</p>
+                <p class="text-gray-500 text-sm mb-1">Total Proyek</p>
                 <h3 class="text-3xl font-bold text-primary"><?= $total_projects ?></h3>
             </div>
             <div class="bg-blue-100 rounded-full p-4">
@@ -17,7 +17,7 @@
     <div class="bg-white rounded-lg shadow-lg p-6">
         <div class="flex items-center justify-between">
             <div>
-                <p class="text-gray-500 text-sm mb-1">Total Articles</p>
+                <p class="text-gray-500 text-sm mb-1">Total Artikel</p>
                 <h3 class="text-3xl font-bold text-green-600"><?= $total_articles ?></h3>
             </div>
             <div class="bg-green-100 rounded-full p-4">
@@ -29,7 +29,7 @@
     <div class="bg-white rounded-lg shadow-lg p-6">
         <div class="flex items-center justify-between">
             <div>
-                <p class="text-gray-500 text-sm mb-1">Gallery Items</p>
+                <p class="text-gray-500 text-sm mb-1">Item Galeri</p>
                 <h3 class="text-3xl font-bold text-purple-600"><?= $total_galleries ?></h3>
             </div>
             <div class="bg-purple-100 rounded-full p-4">
@@ -41,7 +41,7 @@
     <div class="bg-white rounded-lg shadow-lg p-6">
         <div class="flex items-center justify-between">
             <div>
-                <p class="text-gray-500 text-sm mb-1">Partners</p>
+                <p class="text-gray-500 text-sm mb-1">Mitra</p>
                 <h3 class="text-3xl font-bold text-orange-600"><?= $total_partners ?></h3>
             </div>
             <div class="bg-orange-100 rounded-full p-4">
@@ -57,9 +57,9 @@
     <div class="bg-white rounded-lg shadow-lg">
         <div class="p-6 border-b">
             <h3 class="text-xl font-bold flex items-center justify-between">
-                Recent Projects
+                Proyek Terbaru
                 <a href="<?= BASE_URL ?>/admin/projects/create" class="text-sm bg-primary text-white px-4 py-2 rounded hover:bg-blue-700">
-                    <i class="fas fa-plus mr-1"></i>Add New
+                    <i class="fas fa-plus mr-1"></i>Tambah Baru
                 </a>
             </h3>
         </div>
@@ -79,10 +79,10 @@
                     <?php endforeach; ?>
                 </div>
                 <a href="<?= BASE_URL ?>/admin/projects" class="block text-center mt-4 text-primary hover:text-blue-700">
-                    View All <i class="fas fa-arrow-right ml-1"></i>
+                    Lihat Semua <i class="fas fa-arrow-right ml-1"></i>
                 </a>
             <?php else: ?>
-                <p class="text-gray-500 text-center py-8">No projects yet</p>
+                <p class="text-gray-500 text-center py-8">Belum ada proyek</p>
             <?php endif; ?>
         </div>
     </div>
@@ -91,9 +91,9 @@
     <div class="bg-white rounded-lg shadow-lg">
         <div class="p-6 border-b">
             <h3 class="text-xl font-bold flex items-center justify-between">
-                Recent Articles
+                Artikel Terbaru
                 <a href="<?= BASE_URL ?>/admin/articles/create" class="text-sm bg-primary text-white px-4 py-2 rounded hover:bg-blue-700">
-                    <i class="fas fa-plus mr-1"></i>Add New
+                    <i class="fas fa-plus mr-1"></i>Tambah Baru
                 </a>
             </h3>
         </div>
@@ -104,7 +104,7 @@
                         <div class="flex items-center justify-between border-b pb-3">
                             <div>
                                 <h4 class="font-semibold"><?= $article['title'] ?></h4>
-                                <p class="text-sm text-gray-500">By <?= $article['author_name'] ?></p>
+                                <p class="text-sm text-gray-500">Oleh <?= $article['author_name'] ?></p>
                             </div>
                             <a href="<?= BASE_URL ?>/admin/articles/edit/<?= $article['id'] ?>" class="text-primary hover:text-blue-700">
                                 <i class="fas fa-edit"></i>
@@ -113,10 +113,10 @@
                     <?php endforeach; ?>
                 </div>
                 <a href="<?= BASE_URL ?>/admin/articles" class="block text-center mt-4 text-primary hover:text-blue-700">
-                    View All <i class="fas fa-arrow-right ml-1"></i>
+                    Lihat Semua <i class="fas fa-arrow-right ml-1"></i>
                 </a>
             <?php else: ?>
-                <p class="text-gray-500 text-center py-8">No articles yet</p>
+                <p class="text-gray-500 text-center py-8">Belum ada artikel</p>
             <?php endif; ?>
         </div>
     </div>

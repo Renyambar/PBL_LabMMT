@@ -1,9 +1,9 @@
-<?php $page_title = 'Manage Gallery'; require_once '../app/views/layouts/admin_header.php'; ?>
+<?php $page_title = 'Kelola Galeri'; require_once '../app/views/layouts/admin_header.php'; ?>
 
 <div class="flex justify-between items-center mb-6">
-    <h2 class="text-2xl font-bold">Gallery Management</h2>
+    <h2 class="text-2xl font-bold">Manajemen Galeri</h2>
     <a href="<?= BASE_URL ?>/admin/gallery/create" class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
-        <i class="fas fa-plus mr-2"></i>Add New Media
+        <i class="fas fa-plus mr-2"></i>Tambah Media Baru
     </a>
 </div>
 
@@ -11,9 +11,9 @@
 <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
     <form method="GET" class="flex gap-4">
         <select name="type" class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
-            <option value="">All Media Types</option>
-            <option value="image" <?= (($_GET['type'] ?? '') == 'image') ? 'selected' : '' ?>>Images</option>
-            <option value="video" <?= (($_GET['type'] ?? '') == 'video') ? 'selected' : '' ?>>Videos</option>
+            <option value="">Semua Jenis Media</option>
+            <option value="image" <?= (($_GET['type'] ?? '') == 'image') ? 'selected' : '' ?>>Gambar</option>
+            <option value="video" <?= (($_GET['type'] ?? '') == 'video') ? 'selected' : '' ?>>Video</option>
         </select>
         
         <button type="submit" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-blue-700">
@@ -44,7 +44,7 @@
                             <i class="fas fa-edit"></i>
                         </a>
                         <a href="<?= BASE_URL ?>/admin/gallery/delete/<?= $item['id'] ?>" 
-                           onclick="return confirm('Are you sure you want to delete this media?')"
+                           onclick="return confirm('Apakah Anda yakin ingin menghapus media ini?')"
                            class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
                             <i class="fas fa-trash"></i>
                         </a>
@@ -64,9 +64,9 @@
     <?php else: ?>
         <div class="col-span-full bg-white rounded-lg shadow-lg p-12 text-center">
             <i class="fas fa-images text-6xl mb-4 text-gray-300"></i>
-            <p class="text-lg text-gray-500">No media found</p>
+            <p class="text-lg text-gray-500">Tidak ada media ditemukan</p>
             <a href="<?= BASE_URL ?>/admin/gallery/create" class="text-primary hover:underline mt-2 inline-block">
-                Upload your first media
+                Unggah media pertama Anda
             </a>
         </div>
     <?php endif; ?>

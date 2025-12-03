@@ -5,7 +5,7 @@
     <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
             <!-- Back Button -->
-            <a href="<?= BASE_URL ?>/project" class="text-primary hover:text-blue-700 mb-6 inline-block">
+            <a href="<?= BASE_URL ?>/project" class="text-blue-600 hover:text-blue-700 mb-6 inline-block">
                 <i class="fas fa-arrow-left mr-2"></i>Kembali ke Proyek
             </a>
 
@@ -38,7 +38,7 @@
                 
                 <div class="p-8">
                     <div class="flex items-center justify-between mb-4">
-                        <span class="bg-primary text-white px-4 py-2 rounded-full">
+                        <span class="bg-[#0F3A75] text-white px-4 py-2 rounded-full">
                             <?= $project['category'] ?>
                         </span>
                         <span class="text-gray-500">
@@ -81,7 +81,7 @@
                                             allowfullscreen>
                                     </iframe>
                                 <?php else: ?>
-                                    <a href="<?= $project['video_url'] ?>" target="_blank" class="text-primary hover:text-blue-700">
+                                    <a href="<?= $project['video_url'] ?>" target="_blank" class="text-blue-600 hover:text-blue-700">
                                         <i class="fas fa-play-circle mr-2"></i>Lihat Demo Video
                                     </a>
                                 <?php endif; ?>
@@ -120,7 +120,7 @@
                 <!-- Rating Summary -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                     <div class="text-center">
-                        <div class="text-6xl font-bold text-primary mb-2">
+                        <div class="text-6xl font-bold text-[#0F3A75] mb-2">
                             <?= number_format($avg_rating, 1) ?>
                         </div>
                         <div class="text-yellow-400 text-3xl mb-2">
@@ -184,7 +184,7 @@
                                 <?php endfor; ?>
                             </div>
                         </div>
-                        <button type="submit" class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
+                        <button type="submit" class="bg-[#0F3A75] text-white px-6 py-3 rounded-lg hover:bg-[#0C2F61] transition">
                             <i class="fas fa-star mr-2"></i>Submit Rating
                         </button>
                     </form>
@@ -201,7 +201,7 @@
                         <?php foreach ($comments as $comment): ?>
                             <div class="border-b pb-6 last:border-0">
                                 <div class="flex items-start space-x-4">
-                                    <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl">
+                                    <div class="w-12 h-12 bg-[#0F3A75] rounded-full flex items-center justify-center text-white font-bold text-xl">
                                         <?= strtoupper(substr($comment['contributor_name'], 0, 1)) ?>
                                     </div>
                                     <div class="flex-1">
@@ -252,7 +252,7 @@
                             <i class="fas fa-info-circle mr-1"></i>
                             Your comment will be published after admin approval.
                         </p>
-                        <button type="submit" class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
+                        <button type="submit" class="bg-[#0F3A75] text-white px-6 py-3 rounded-lg hover:bg-[#0C2F61] transition">
                             <i class="fas fa-comment mr-2"></i>Submit Comment
                         </button>
                     </form>

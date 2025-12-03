@@ -1,7 +1,7 @@
 <?php require_once '../app/views/layouts/header.php'; ?>
 
 <!-- Page Header -->
-<section class="bg-gradient-to-r from-black/100 via-blue-700 to-blue-600 text-white py-16">
+<section class="bg-gradient-to-r from-black/100 via-blue-800 to-blue-600 text-white py-16">
     <div class="container mx-auto px-4">
         <h1 class="text-4xl font-bold mb-4">Portofolio Proyek</h1>
         <p class="text-xl">Koleksi karya dan inovasi digital dari Lab MMT</p>
@@ -16,7 +16,7 @@
             <form action="<?= BASE_URL ?>/project" method="GET" class="flex w-full md:w-auto">
                 <input type="text" name="search" placeholder="Cari proyek..." value="<?= $search ?? '' ?>" 
                        class="px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary w-full md:w-64">
-                <button type="submit" class="bg-primary text-white px-6 py-2 rounded-r-lg hover:bg-blue-700 transition">
+                <button type="submit" class="bg-[#0F3A75] text-white px-6 py-2 rounded-r-lg hover:bg-[#0C2F61] transition">
                     <i class="fas fa-search"></i>
                 </button>
             </form>
@@ -24,13 +24,13 @@
             <!-- Category Filter -->
             <div class="flex space-x-2 overflow-x-auto">
                 <a href="<?= BASE_URL ?>/project" 
-                   class="px-4 py-2 rounded-lg <?= !isset($current_category) ? 'bg-primary text-white' : 'bg-white text-gray-700 hover:bg-gray-200' ?> transition whitespace-nowrap">
+                   class="px-4 py-2 rounded-lg <?= !isset($current_category) ? 'bg-[#0F3A75] text-white' : 'bg-white text-gray-700 hover:bg-gray-200' ?> transition whitespace-nowrap">
                     Semua
                 </a>
                 <?php if (!empty($categories)): ?>
                     <?php foreach ($categories as $cat): ?>
                         <a href="<?= BASE_URL ?>/project?category=<?= urlencode($cat['category']) ?>" 
-                           class="px-4 py-2 rounded-lg <?= isset($current_category) && $current_category == $cat['category'] ? 'bg-primary text-white' : 'bg-white text-gray-700 hover:bg-gray-200' ?> transition whitespace-nowrap">
+                           class="px-4 py-2 rounded-lg <?= isset($current_category) && $current_category == $cat['category'] ? 'bg-[#0F3A75] text-white' : 'bg-white text-gray-700 hover:bg-gray-200' ?> transition whitespace-nowrap">
                             <?= $cat['category'] ?>
                         </a>
                     <?php endforeach; ?>
@@ -59,7 +59,7 @@
                                     <i class="fas fa-image text-gray-400 text-5xl"></i>
                                 </div>
                             <?php endif; ?>
-                            <span class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm">
+                            <span class="absolute top-4 right-4 bg-[#0F3A75] text-white px-3 py-1 rounded-full text-sm">
                                 <?= $project['category'] ?>
                             </span>
                         </div>
@@ -85,7 +85,7 @@
             <?php if (count($projects) > $maxDisplay): ?>
                 <!-- Button Lihat Semua Proyek -->
                 <div class="text-center mt-12">
-                    <button id="showAllBtn" onclick="showAllProjects()" class="bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition shadow-lg">
+                    <button id="showAllBtn" onclick="showAllProjects()" class="bg-[#0F3A75] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#0C2F61] transition shadow-lg">
                         <i class="fas fa-eye mr-2"></i>Lihat Semua Proyek (<?= count($projects) ?>)
                     </button>
                 </div>

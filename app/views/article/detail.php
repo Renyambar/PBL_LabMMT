@@ -31,10 +31,10 @@
                 <div class="mt-12 border-t pt-6">
                     <h4 class="font-semibold mb-3">Bagikan Artikel:</h4>
                     <div class="flex flex-wrap gap-3">
-                        <button class="bg-blue-600 px-5 py-2 rounded-lg text-white">Facebook</button>
-                        <button class="bg-sky-500 px-5 py-2 rounded-lg text-white">Twitter</button>
-                        <button class="bg-blue-700 px-5 py-2 rounded-lg text-white">LinkedIn</button>
-                        <button class="bg-green-500 px-5 py-2 rounded-lg text-white">WhatsApp</button>
+                        <button class="bg-blue-600 px-5 py-2 rounded-lg text-white hover:bg-blue-700 transition">Facebook</button>
+                        <button class="bg-sky-500 px-5 py-2 rounded-lg text-white hover:bg-sky-600 transition">Twitter</button>
+                        <button class="bg-blue-700 px-5 py-2 rounded-lg text-white hover:bg-blue-800 transition">LinkedIn</button>
+                        <button class="bg-green-500 px-5 py-2 rounded-lg text-white hover:bg-green-600 transition">WhatsApp</button>
                     </div>
                 </div>
             </div>

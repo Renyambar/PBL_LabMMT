@@ -21,10 +21,10 @@ $hasMore = $totalArticles > $articlesPerPage;
 ?>
 
 <!-- Page Header -->
-<section class="text-white py-20 bg-[linear-gradient(90deg,#0A2A78,#1E4DB8,#2D72F0)]">
+<section class="bg-gradient-to-r from-black/100 via-blue-800 to-blue-600 text-white py-16">
     <div class="container mx-auto px-4">
-        <h1 class="text-5xl font-bold mb-3">Artikel & Berita</h1>
-        <p class="text-xl opacity-90">Update kegiatan dan publikasi Lab MMT</p>
+        <h1 class="text-4xl font-bold mb-4">Artikel & Berita</h1>
+        <p class="text-xl">Update kegiatan dan publikasi Lab MMT</p>
     </div>
 </section>
 
@@ -35,8 +35,8 @@ $hasMore = $totalArticles > $articlesPerPage;
             <input type="text" name="search" placeholder="Cari artikel..."
                    value="<?= $search ?? '' ?>"
                    class="px-4 py-3 border border-gray-300 rounded-l-lg focus:ring-blue-600 flex-1">
-            <button type="submit" class="bg-blue-600 text-white px-8 py-3 rounded-r-lg hover:bg-blue-700 transition">
-                <i class="fas fa-search mr-2"></i>Search
+            <button type="submit" class="bg-[#0F3A75] text-white px-8 py-3 rounded-r-lg hover:bg-[#0C2F61] transition">
+                <i class="fas fa-search mr-2"></i>Cari
             </button>
         </form>
     </div>
@@ -91,7 +91,7 @@ $hasMore = $totalArticles > $articlesPerPage;
             <!-- Lihat Semua Berita Button -->
             <div class="text-center mt-12">
                 <a href="<?= BASE_URL ?>/article?show=all<?= isset($search) && $search !== '' ? '&search='.urlencode($search) : '' ?>"
-                    class="inline-block bg-blue-600 text-white px-10 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+                    class="inline-block bg-[#0F3A75] text-white px-10 py-3 rounded-lg font-semibold hover:bg-[#0C2F61] transition">
                         Lihat Semua Berita
                 </a>
             </div>

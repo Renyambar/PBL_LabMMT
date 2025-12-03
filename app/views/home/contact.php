@@ -1,7 +1,7 @@
 <?php require_once '../app/views/layouts/header.php'; ?>
 
 <!-- Page Header -->
-<section class="bg-gradient-to-r from-primary to-secondary text-white py-16">
+<section class="bg-gradient-to-r from-black/100 via-blue-800 to-blue-600 text-white py-16">
     <div class="container mx-auto px-4">
         <h1 class="text-4xl font-bold mb-4">Hubungi Kami</h1>
         <p class="text-xl">Kami siap membantu dan menjawab pertanyaan Anda</p>
@@ -54,7 +54,7 @@
                         </div>
 
                         <button type="submit" 
-                                class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+                                class="w-full bg-[#0F3A75] text-white py-3 rounded-lg font-semibold hover:bg-[#0C2F61] transition">
                             <i class="fas fa-paper-plane mr-2"></i>Kirim Pesan
                         </button>
                     </form>
@@ -68,7 +68,7 @@
                         
                         <div class="space-y-6">
                             <div class="flex items-start space-x-4">
-                                <div class="bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
+                                <div class="bg-[#0F3A75] text-white w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
                                     <i class="fas fa-map-marker-alt"></i>
                                 </div>
                                 <div>
@@ -80,7 +80,7 @@
                             </div>
 
                             <div class="flex items-start space-x-4">
-                                <div class="bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
+                                <div class="bg-[#0F3A75] text-white w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
                                     <i class="fas fa-phone"></i>
                                 </div>
                                 <div>
@@ -91,7 +91,7 @@
                             </div>
 
                             <div class="flex items-start space-x-4">
-                                <div class="bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
+                                <div class="bg-[#0F3A75] text-white w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
                                     <i class="fas fa-envelope"></i>
                                 </div>
                                 <div>
@@ -141,11 +141,18 @@
 
             <!-- Map -->
             <div class="mt-8 bg-white rounded-lg shadow-lg overflow-hidden">
-                <div class="h-96 bg-gray-300 flex items-center justify-center">
-                    <div class="text-center text-gray-500">
-                        <i class="fas fa-map-marked-alt text-5xl mb-3"></i>
-                        <p>Google Maps integration dapat ditambahkan di sini</p>
-                    </div>
+                <h3 class="text-2xl font-bold p-6 border-b">Lokasi Kami</h3>
+                <div class="h-96">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.562361178489!2d112.61401407499654!3d-7.946867992071854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78827687d272e7%3A0x789ce9a636cd3aa2!2sPoliteknik%20Negeri%20Malang!5e0!3m2!1sid!2sid!4v1733199600000!5m2!1sid!2sid"
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="w-full h-full">
+                    </iframe>
                 </div>
             </div>
         </div>

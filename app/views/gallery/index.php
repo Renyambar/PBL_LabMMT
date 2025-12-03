@@ -1,7 +1,7 @@
 <?php require_once '../app/views/layouts/header.php'; ?>
 
 <!-- Page Header -->
-<section class="bg-gradient-to-r from-primary to-secondary text-white py-16">
+<section class="bg-gradient-to-r from-black/100 via-blue-800 to-blue-600 text-white py-16">
     <div class="container mx-auto px-4">
         <h1 class="text-4xl font-bold mb-4">Galeri Multimedia</h1>
         <p class="text-xl">Dokumentasi kegiatan dan karya Lab MMT</p>
@@ -13,15 +13,15 @@
     <div class="container mx-auto px-4">
         <div class="flex justify-center space-x-4">
             <a href="<?= BASE_URL ?>/gallery" 
-               class="px-6 py-3 rounded-lg <?= !isset($current_type) ? 'bg-primary text-white' : 'bg-white text-gray-700 hover:bg-gray-200' ?> transition">
+               class="px-6 py-3 rounded-lg <?= !isset($current_type) ? 'bg-[#0F3A75] text-white' : 'bg-white text-gray-700 hover:bg-gray-200' ?> transition">
                 <i class="fas fa-th mr-2"></i>Semua
             </a>
             <a href="<?= BASE_URL ?>/gallery?type=image" 
-               class="px-6 py-3 rounded-lg <?= isset($current_type) && $current_type == 'image' ? 'bg-primary text-white' : 'bg-white text-gray-700 hover:bg-gray-200' ?> transition">
+               class="px-6 py-3 rounded-lg <?= isset($current_type) && $current_type == 'image' ? 'bg-[#0F3A75] text-white' : 'bg-white text-gray-700 hover:bg-gray-200' ?> transition">
                 <i class="fas fa-image mr-2"></i>Foto
             </a>
             <a href="<?= BASE_URL ?>/gallery?type=video" 
-               class="px-6 py-3 rounded-lg <?= isset($current_type) && $current_type == 'video' ? 'bg-primary text-white' : 'bg-white text-gray-700 hover:bg-gray-200' ?> transition">
+               class="px-6 py-3 rounded-lg <?= isset($current_type) && $current_type == 'video' ? 'bg-[#0F3A75] text-white' : 'bg-white text-gray-700 hover:bg-gray-200' ?> transition">
                 <i class="fas fa-video mr-2"></i>Video
             </a>
         </div>

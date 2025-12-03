@@ -40,24 +40,28 @@
                 </a>
                 <a href="<?= BASE_URL ?>/admin/projects" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition mb-2">
                     <i class="fas fa-project-diagram"></i>
-                    <span>Projects</span>
+                    <span>Proyek</span>
                 </a>
                 <a href="<?= BASE_URL ?>/admin/articles" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition mb-2">
                     <i class="fas fa-newspaper"></i>
-                    <span>Articles</span>
+                    <span>Artikel</span>
                 </a>
                 <a href="<?= BASE_URL ?>/admin/gallery" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition mb-2">
                     <i class="fas fa-images"></i>
-                    <span>Gallery</span>
+                    <span>Galeri</span>
                 </a>
                 <a href="<?= BASE_URL ?>/admin/partners" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition mb-2">
                     <i class="fas fa-handshake"></i>
-                    <span>Partners</span>
+                    <span>Mitra</span>
+                </a>
+                <a href="<?= BASE_URL ?>/admin/comments" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition mb-2">
+                    <i class="fas fa-comments"></i>
+                    <span>Komentar</span>
                 </a>
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
                 <a href="<?= BASE_URL ?>/admin/users" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition mb-2">
                     <i class="fas fa-users"></i>
-                    <span>Users</span>
+                    <span>Pengguna</span>
                 </a>
                 <?php endif; ?>
             </nav>

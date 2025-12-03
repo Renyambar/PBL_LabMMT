@@ -1,9 +1,9 @@
-<?php $page_title = 'Manage Projects'; require_once '../app/views/layouts/admin_header.php'; ?>
+<?php $page_title = 'Kelola Proyek'; require_once '../app/views/layouts/admin_header.php'; ?>
 
 <div class="flex justify-between items-center mb-6">
-    <h3 class="text-2xl font-bold">All Projects</h3>
+    <h3 class="text-2xl font-bold">Semua Proyek</h3>
     <a href="<?= BASE_URL ?>/project/create" class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
-        <i class="fas fa-plus mr-2"></i>Add New Project
+        <i class="fas fa-plus mr-2"></i>Tambah Proyek Baru
     </a>
 </div>
 
@@ -15,10 +15,10 @@
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Thumbnail</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Judul</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dibuat</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
@@ -52,12 +52,12 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                 <a href="<?= BASE_URL ?>/admin/projects/edit/<?= $project['id'] ?>" 
                                    class="text-indigo-600 hover:text-indigo-900 mr-3">
-                                    <i class="fas fa-edit"></i> Edit
+                                    <i class="fas fa-edit"></i> Ubah
                                 </a>
                                 <a href="<?= BASE_URL ?>/admin/projects/delete/<?= $project['id'] ?>" 
-                                   onclick="return confirm('Are you sure you want to delete this project?')"
+                                   onclick="return confirm('Apakah Anda yakin ingin menghapus proyek ini?')"
                                    class="text-red-600 hover:text-red-900">
-                                    <i class="fas fa-trash"></i> Delete
+                                    <i class="fas fa-trash"></i> Hapus
                                 </a>
                             </td>
                         </tr>
@@ -66,9 +66,9 @@
                     <tr>
                         <td colspan="6" class="px-6 py-12 text-center text-gray-500">
                             <i class="fas fa-folder-open text-6xl mb-4 text-gray-300"></i>
-                            <p class="text-lg">No projects found</p>
+                            <p class="text-lg">Tidak ada proyek ditemukan</p>
                             <a href="<?= BASE_URL ?>/admin/projects/create" class="text-primary hover:underline mt-2 inline-block">
-                                Create your first project
+                                Buat proyek pertama Anda
                             </a>
                         </td>
                     </tr>
