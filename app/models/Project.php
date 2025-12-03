@@ -47,8 +47,8 @@ class Project
     // Create new project
     public function create($data)
     {
-        $query = "INSERT INTO projects (title, slug, description, category, tags, thumbnail, video_url) 
-                  VALUES (:title, :slug, :description, :category, :tags, :thumbnail, :video_url)";
+        $query = "INSERT INTO projects (title, slug, description, category, tags, thumbnail, video_url, team_name, team_members) 
+                  VALUES (:title, :slug, :description, :category, :tags, :thumbnail, :video_url, :team_name, :team_members)";
         $params = [
             'title' => $data['title'],
             'slug' => $this->generateSlug($data['title']),
@@ -56,7 +56,9 @@ class Project
             'category' => $data['category'],
             'tags' => $data['tags'],
             'thumbnail' => $data['thumbnail'] ?? null,
-            'video_url' => $data['video_url'] ?? null
+            'video_url' => $data['video_url'] ?? null,
+            'team_name' => $data['team_name'] ?? null,
+            'team_members' => $data['team_members'] ?? null
         ];
         return $this->db->execute($query, $params);
     }
@@ -66,7 +68,7 @@ class Project
     {
         $query = "UPDATE projects SET title = :title, slug = :slug, description = :description, 
                   category = :category, tags = :tags, thumbnail = :thumbnail, video_url = :video_url, 
-                  updated_at = CURRENT_TIMESTAMP WHERE id = :id";
+                  team_name = :team_name, team_members = :team_members, updated_at = CURRENT_TIMESTAMP WHERE id = :id";
         $params = [
             'id' => $id,
             'title' => $data['title'],
@@ -75,7 +77,9 @@ class Project
             'category' => $data['category'],
             'tags' => $data['tags'],
             'thumbnail' => $data['thumbnail'],
-            'video_url' => $data['video_url'] ?? null
+            'video_url' => $data['video_url'] ?? null,
+            'team_name' => $data['team_name'] ?? null,
+            'team_members' => $data['team_members'] ?? null
         ];
         return $this->db->execute($query, $params);
     }

@@ -16,8 +16,7 @@
     <!-- Header Bar -->
     <div class="fixed top-0 left-0 right-0 bg-gradient-to-r from-[#0F3A75] to-[#2563eb] text-white py-4 px-6 shadow-lg z-10">
         <div class="flex items-center">
-            <img src="<?= BASE_URL ?>/assets/img/logo-ptn.png" alt="Logo" class="h-12 mr-3">
-            <h1 class="text-xl font-bold">Welcome to Lab Multimedia & Mobile Tech</h1>
+            <h1 class="text-xl font-bold">Selamat datang di Lab Multimedia & Mobile Tech</h1>
         </div>
     </div>
 

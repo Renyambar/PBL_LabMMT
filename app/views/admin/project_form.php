@@ -51,6 +51,28 @@
                        placeholder="contoh: React, Node.js, MongoDB">
             </div>
 
+            <!-- Team Name -->
+            <div>
+                <label class="block text-gray-700 font-semibold mb-2">
+                    <i class="fas fa-users mr-2"></i>Nama Tim
+                </label>
+                <input type="text" name="team_name"
+                       value="<?= $project['team_name'] ?? '' ?>"
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                       placeholder="contoh: Tim Inovasi Digital">
+            </div>
+
+            <!-- Team Members -->
+            <div class="md:col-span-2">
+                <label class="block text-gray-700 font-semibold mb-2">
+                    <i class="fas fa-user-friends mr-2"></i>Anggota Tim
+                </label>
+                <textarea name="team_members" rows="3"
+                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                          placeholder="Masukkan nama anggota tim, pisahkan dengan koma atau enter&#10;contoh:&#10;Ahmad Rifai&#10;Siti Nurhaliza&#10;Budi Santoso"><?= $project['team_members'] ?? '' ?></textarea>
+                <p class="text-sm text-gray-500 mt-1">Pisahkan setiap anggota dengan enter (baris baru) atau koma</p>
+            </div>
+
             <!-- Description -->
             <div class="md:col-span-2">
                 <label class="block text-gray-700 font-semibold mb-2">

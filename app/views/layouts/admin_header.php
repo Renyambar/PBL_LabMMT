@@ -24,8 +24,8 @@
         <!-- Sidebar -->
         <aside class="w-64 bg-gray-900 text-white flex flex-col">
             <div class="p-6 border-b border-gray-800">
-                <div class="flex items-center space-x-2">
-                    <i class="fas fa-flask text-2xl text-primary"></i>
+                <div class="flex items-center space-x-3">
+                    <img src="<?= BASE_URL ?>/assets/img/favicon.ico" alt="Logo Lab MMT" class="w-10 h-10 object-contain">
                     <div>
                         <h1 class="text-xl font-bold">Lab MMT</h1>
                         <p class="text-xs text-gray-400">Admin Panel</p>

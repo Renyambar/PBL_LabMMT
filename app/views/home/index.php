@@ -3,14 +3,14 @@
 <!-- Hero Section -->
 <section class="bg-gradient-to-r from-black/100 via-blue-800 to-blue-600 text-white py-16">
     <div class="container mx-auto px-4">
-        <div class="flex items-center justify-between">
-            <div class="w-1/3 flex justify-center">
-                <img src="<?= BASE_URL ?>/assets/img/favicon.ico" alt="Lab MMT Mascot" class="w-64 h-auto">
+        <div class="flex flex-col-reverse md:flex-row items-center justify-between gap-8">
+            <div class="w-full md:w-1/3 flex justify-center">
+                <img src="<?= BASE_URL ?>/assets/img/favicon.ico" alt="Lab MMT Mascot" class="w-48 md:w-64 h-auto">
             </div>
-            <div class="w-2/3 pl-8">
-                <h1 class="text-4xl font-bold mb-4">Laboratorium Multimedia &<br>Mobile Technology</h1>
-                <p class="text-lg mb-6">Mengembangkan inovasi digital dan teknologi mobile masa depan yang<br>lebih baik</p>
-                <div class="flex space-x-4">
+            <div class="w-full md:w-2/3 md:pl-8 text-center md:text-left">
+                <h1 class="text-3xl md:text-4xl font-bold mb-4">Laboratorium Multimedia &<br>Mobile Technology</h1>
+                <p class="text-base md:text-lg mb-6">Mengembangkan inovasi digital dan teknologi mobile masa depan yang lebih baik</p>
+                <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 justify-center md:justify-start">
                     <a href="<?= BASE_URL ?>/project" class="bg-white text-blue-700 px-6 py-2 rounded font-semibold hover:bg-gray-100 transition">
                         Lihat Proyek
                     </a>

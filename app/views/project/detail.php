@@ -49,6 +49,43 @@
 
                     <h1 class="text-4xl font-bold mb-6"><?= $project['title'] ?></h1>
 
+                    <?php if (!empty($project['team_name']) || !empty($project['team_members'])): ?>
+                    <!-- Team Info -->
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-[#0F3A75] rounded-lg p-5 mb-6">
+                        <div class="flex items-start">
+                            <div class="bg-[#0F3A75] text-white rounded-full p-3 mr-4">
+                                <i class="fas fa-users text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <?php if (!empty($project['team_name'])): ?>
+                                <h3 class="text-lg font-bold text-gray-800 mb-2"><?= $project['team_name'] ?></h3>
+                                <?php endif; ?>
+                                
+                                <?php if (!empty($project['team_members'])): ?>
+                                <div class="text-sm text-gray-600 mb-1 font-semibold">Anggota Tim:</div>
+                                <div class="flex flex-wrap gap-2">
+                                    <?php 
+                                    // Split by newline or comma
+                                    $members = preg_split('/[\n,]+/', $project['team_members']);
+                                    foreach ($members as $member): 
+                                        $member = trim($member);
+                                        if (!empty($member)):
+                                    ?>
+                                        <span class="inline-flex items-center bg-white text-gray-700 px-3 py-1 rounded-full text-sm border border-gray-200">
+                                            <i class="fas fa-user text-[#0F3A75] mr-2 text-xs"></i>
+                                            <?= htmlspecialchars($member) ?>
+                                        </span>
+                                    <?php 
+                                        endif;
+                                    endforeach; 
+                                    ?>
+                                </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+
                     <!-- Tags -->
                     <div class="flex flex-wrap gap-2 mb-6">
                         <?php 
