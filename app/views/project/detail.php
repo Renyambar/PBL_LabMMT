@@ -152,7 +152,7 @@
 
             <!-- Ratings Section -->
             <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
-                <h2 class="text-3xl font-bold mb-6">Ratings & Reviews</h2>
+                <h2 class="text-3xl font-bold mb-6">Penilaian & Ulasan</h2>
                 
                 <!-- Rating Summary -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
@@ -165,7 +165,7 @@
                                 <i class="fas fa-star<?= $i <= round($avg_rating) ? '' : '-o' ?>"></i>
                             <?php endfor; ?>
                         </div>
-                        <p class="text-gray-600"><?= $total_ratings ?> ratings</p>
+                        <p class="text-gray-600"><?= $total_ratings ?> penilaian</p>
                     </div>
                     
                     <div>
@@ -190,39 +190,39 @@
 
                 <!-- Rate This Project Form -->
                 <div class="border-t pt-6">
-                    <h3 class="text-xl font-bold mb-4">Rate This Project</h3>
+                    <h3 class="text-xl font-bold mb-4">Beri Penilaian</h3>
                     <form action="<?= BASE_URL ?>/project/rate/<?= $project['id'] ?>" method="POST" class="space-y-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-gray-700 font-semibold mb-2">
-                                    Your Name <span class="text-sm text-gray-500">(Optional - leave blank for Anonymous)</span>
+                                    Nama Anda <span class="text-sm text-gray-500">(Opsional - kosongkan untuk Anonim)</span>
                                 </label>
                                 <input type="text" name="contributor_name"
                                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                                       placeholder="Anonymous">
+                                       placeholder="Anonim">
                             </div>
                             <div>
                                 <label class="block text-gray-700 font-semibold mb-2">
-                                    Your Email <span class="text-sm text-gray-500">(Optional)</span>
+                                    Email Anda <span class="text-sm text-gray-500">(Opsional)</span>
                                 </label>
                                 <input type="email" name="contributor_email"
                                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                                       placeholder="your@email.com">
+                                       placeholder="email@anda.com">
                             </div>
                         </div>
                         <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Your Rating *</label>
-                            <div class="flex space-x-2">
+                            <label class="block text-gray-700 font-semibold mb-2">Penilaian Anda *</label>
+                            <div class="flex space-x-2" id="rating-stars">
                                 <?php for ($i = 1; $i <= 5; $i++): ?>
-                                    <label class="cursor-pointer">
-                                        <input type="radio" name="rating" value="<?= $i ?>" required class="hidden peer">
-                                        <i class="fas fa-star text-4xl text-gray-300 peer-checked:text-yellow-400 hover:text-yellow-400"></i>
+                                    <label class="cursor-pointer star-label" data-rating="<?= $i ?>">
+                                        <input type="radio" name="rating" value="<?= $i ?>" required class="hidden">
+                                        <i class="fas fa-star text-4xl text-gray-300 hover:text-yellow-400 transition-colors"></i>
                                     </label>
                                 <?php endfor; ?>
                             </div>
                         </div>
                         <button type="submit" class="bg-[#0F3A75] text-white px-6 py-3 rounded-lg hover:bg-[#0C2F61] transition">
-                            <i class="fas fa-star mr-2"></i>Submit Rating
+                            <i class="fas fa-star mr-2"></i>Kirim Penilaian
                         </button>
                     </form>
                 </div>
@@ -230,7 +230,7 @@
 
             <!-- Comments Section -->
             <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
-                <h2 class="text-3xl font-bold mb-6">Comments (<?= $total_comments ?>)</h2>
+                <h2 class="text-3xl font-bold mb-6">Komentar (<?= $total_comments ?>)</h2>
                 
                 <!-- Comments List -->
                 <?php if (!empty($comments)): ?>
@@ -254,43 +254,43 @@
                         <?php endforeach; ?>
                     </div>
                 <?php else: ?>
-                    <p class="text-gray-500 text-center py-8">No comments yet. Be the first to comment!</p>
+                    <p class="text-gray-500 text-center py-8">Belum ada komentar. Jadilah yang pertama berkomentar!</p>
                 <?php endif; ?>
 
                 <!-- Add Comment Form -->
                 <div class="border-t pt-6">
-                    <h3 class="text-xl font-bold mb-4">Add Your Comment</h3>
+                    <h3 class="text-xl font-bold mb-4">Tambahkan Komentar Anda</h3>
                     <form action="<?= BASE_URL ?>/project/comment/<?= $project['id'] ?>" method="POST" class="space-y-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-gray-700 font-semibold mb-2">
-                                    Your Name <span class="text-sm text-gray-500">(Optional - leave blank for Anonymous)</span>
+                                    Nama Anda <span class="text-sm text-gray-500">(Opsional - kosongkan untuk Anonim)</span>
                                 </label>
                                 <input type="text" name="contributor_name"
                                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                                       placeholder="Anonymous">
+                                       placeholder="Anonim">
                             </div>
                             <div>
                                 <label class="block text-gray-700 font-semibold mb-2">
-                                    Your Email <span class="text-sm text-gray-500">(Optional)</span>
+                                    Email Anda <span class="text-sm text-gray-500">(Opsional)</span>
                                 </label>
                                 <input type="email" name="contributor_email"
                                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                                       placeholder="your@email.com">
+                                       placeholder="email@anda.com">
                             </div>
                         </div>
                         <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Your Comment *</label>
+                            <label class="block text-gray-700 font-semibold mb-2">Komentar Anda *</label>
                             <textarea name="comment" required rows="4" minlength="10"
                                       class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                                      placeholder="Share your thoughts about this project... (minimum 10 characters)"></textarea>
+                                      placeholder="Bagikan pendapat Anda tentang proyek ini... (minimal 10 karakter)"></textarea>
                         </div>
                         <p class="text-sm text-gray-500">
                             <i class="fas fa-info-circle mr-1"></i>
-                            Your comment will be published after admin approval.
+                            Komentar Anda akan ditampilkan setelah disetujui admin.
                         </p>
                         <button type="submit" class="bg-[#0F3A75] text-white px-6 py-3 rounded-lg hover:bg-[#0C2F61] transition">
-                            <i class="fas fa-comment mr-2"></i>Submit Comment
+                            <i class="fas fa-comment mr-2"></i>Kirim Komentar
                         </button>
                     </form>
                 </div>
@@ -298,5 +298,69 @@
         </div>
     </div>
 </section>
+
+<script>
+// Rating stars functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const ratingContainer = document.getElementById('rating-stars');
+    if (ratingContainer) {
+        const starLabels = ratingContainer.querySelectorAll('.star-label');
+        const stars = ratingContainer.querySelectorAll('.fa-star');
+        
+        starLabels.forEach((label, index) => {
+            label.addEventListener('click', function() {
+                const rating = parseInt(this.getAttribute('data-rating'));
+                
+                // Update all stars up to clicked star
+                stars.forEach((star, starIndex) => {
+                    if (starIndex < rating) {
+                        star.classList.remove('text-gray-300');
+                        star.classList.add('text-yellow-400');
+                    } else {
+                        star.classList.remove('text-yellow-400');
+                        star.classList.add('text-gray-300');
+                    }
+                });
+                
+                // Check the radio button
+                this.querySelector('input[type="radio"]').checked = true;
+            });
+            
+            // Hover effect
+            label.addEventListener('mouseenter', function() {
+                const rating = parseInt(this.getAttribute('data-rating'));
+                stars.forEach((star, starIndex) => {
+                    if (starIndex < rating) {
+                        star.classList.add('text-yellow-400');
+                        star.classList.remove('text-gray-300');
+                    }
+                });
+            });
+        });
+        
+        // Reset on mouse leave
+        ratingContainer.addEventListener('mouseleave', function() {
+            const checkedInput = ratingContainer.querySelector('input[type="radio"]:checked');
+            if (checkedInput) {
+                const rating = parseInt(checkedInput.value);
+                stars.forEach((star, starIndex) => {
+                    if (starIndex < rating) {
+                        star.classList.add('text-yellow-400');
+                        star.classList.remove('text-gray-300');
+                    } else {
+                        star.classList.remove('text-yellow-400');
+                        star.classList.add('text-gray-300');
+                    }
+                });
+            } else {
+                stars.forEach(star => {
+                    star.classList.remove('text-yellow-400');
+                    star.classList.add('text-gray-300');
+                });
+            }
+        });
+    }
+});
+</script>
 
 <?php require_once '../app/views/layouts/footer.php'; ?>
