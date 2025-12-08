@@ -4,7 +4,7 @@
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'lab_mmt');
 define('DB_USER', 'postgres');
-define('DB_PASS', 'brian927.,.,');
+define('DB_PASS', 'zemoteno');
 define('DB_PORT', '5432');
 
 // App Configuration
