@@ -181,33 +181,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Statistics -->
-        <div class="max-w-6xl mx-auto mb-12">
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-                <div class="bg-white rounded-lg shadow-md p-6 text-center">
-                    <div class="text-4xl font-bold text-[#0F3A75] mb-2">120+</div>
-                    <div class="text-gray-600 text-sm font-semibold">MAHASISWA</div>
-                </div>
-                <div class="bg-white rounded-lg shadow-md p-6 text-center">
-                    <div class="text-4xl font-bold text-[#0F3A75] mb-2">48+</div>
-                    <div class="text-gray-600 text-sm font-semibold">PROJECT</div>
-                </div>
-                <div class="bg-white rounded-lg shadow-md p-6 text-center">
-                    <div class="text-4xl font-bold text-[#0F3A75] mb-2">24+</div>
-                    <div class="text-gray-600 text-sm font-semibold">MITRA KERJA</div>
-                </div>
-                <div class="bg-white rounded-lg shadow-md p-6 text-center">
-                    <div class="text-4xl font-bold text-[#0F3A75] mb-2">10+</div>
-                    <div class="text-gray-600 text-sm font-semibold">AWARD</div>
-                </div>
-                <div class="bg-white rounded-lg shadow-md p-6 text-center">
-                    <div class="text-4xl font-bold text-[#0F3A75] mb-2">15+</div>
-                    <div class="text-gray-600 text-sm font-semibold">PENGHARGAAN</div>
-                </div>
-            </div>
-        </div>
-
         <!-- Team Members -->
         <div class="max-w-6xl mx-auto">
             <h2 class="text-3xl font-bold mb-8 text-[#0F3A75] text-center">Anggota Tim</h2>
