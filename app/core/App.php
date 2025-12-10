@@ -52,10 +52,17 @@ class App
                         array_shift($url); // Remove resource
                         array_shift($url); // Remove action
                     } else {
-                        // If composite method doesn't exist, try normal method
-                        if (method_exists($this->controller, $url[0])) {
-                            $this->method = $url[0];
-                            array_shift($url); // Remove method
+                        // If composite method doesn't exist, try normal method on url[1]
+                        if (method_exists($this->controller, $url[1])) {
+                            $this->method = $url[1];
+                            array_shift($url); // Remove resource
+                            array_shift($url); // Remove action
+                        } else {
+                            // Last resort: try url[0] as method
+                            if (method_exists($this->controller, $url[0])) {
+                                $this->method = $url[0];
+                                array_shift($url); // Remove method
+                            }
                         }
                     }
                 }

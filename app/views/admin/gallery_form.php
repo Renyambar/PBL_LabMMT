@@ -54,7 +54,7 @@
             <?php if (isset($gallery['file_path']) && $gallery['file_path']): ?>
                 <div class="mb-3">
                     <?php if ($gallery['media_type'] == 'image'): ?>
-                        <img src="<?= BASE_URL ?>/uploads/gallery/<?= $gallery['file_path'] ?>" 
+                        <img src="<?= BASE_URL ?>/assets/img/<?= $gallery['file_path'] ?>" 
                              alt="File saat ini" 
                              class="h-32 w-auto rounded border">
                     <?php else: ?>

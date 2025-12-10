@@ -41,7 +41,7 @@
             </label>
             <?php if (isset($partner['logo']) && $partner['logo']): ?>
                 <div class="mb-3 p-4 bg-gray-50 rounded inline-block">
-                    <img src="<?= BASE_URL ?>/uploads/partners/<?= $partner['logo'] ?>" 
+                    <img src="<?= BASE_URL ?>/assets/img/<?= $partner['logo'] ?>" 
                          alt="Logo saat ini" 
                          class="h-24 w-auto">
                     <p class="text-sm text-gray-500 mt-1">Logo saat ini</p>

@@ -40,7 +40,7 @@
             </label>
             <?php if (isset($article['thumbnail']) && $article['thumbnail']): ?>
                 <div class="mb-3">
-                    <img src="<?= BASE_URL ?>/uploads/articles/<?= $article['thumbnail'] ?>" 
+                    <img src="<?= BASE_URL ?>/assets/img/<?= $article['thumbnail'] ?>" 
                          alt="Gambar thumbnail saat ini" 
                          class="h-32 w-auto rounded border">
                     <p class="text-sm text-gray-500 mt-1">Gambar saat ini</p>

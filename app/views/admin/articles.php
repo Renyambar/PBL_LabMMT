@@ -38,7 +38,7 @@
                     <tr class="hover:bg-gray-50">
                         <td class="px-6 py-4 whitespace-nowrap">
                             <?php if ($article['thumbnail']): ?>
-                                <img src="<?= BASE_URL ?>/uploads/articles/<?= $article['thumbnail'] ?>" 
+                                <img src="<?= BASE_URL ?>/assets/img/<?= $article['thumbnail'] ?>" 
                                      alt="<?= $article['title'] ?>" 
                                      class="h-16 w-16 object-cover rounded">
                             <?php else: ?>

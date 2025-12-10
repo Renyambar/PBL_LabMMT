@@ -29,9 +29,9 @@
             <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
                 <div class="relative aspect-square bg-gray-200">
                     <?php if ($item['media_type'] == 'image'): ?>
-                        <img src="<?= BASE_URL ?>/uploads/gallery/<?= $item['file_path'] ?>" 
+                        <img src="<?= BASE_URL ?>/assets/img/<?= $item['file_path'] ?>" 
                              alt="<?= $item['title'] ?>" 
-                             class="w-full h-full object-cover">
+                             class="w-full h-48 object-cover">
                     <?php else: ?>
                         <div class="w-full h-full flex items-center justify-center bg-gray-800">
                             <i class="fas fa-video text-white text-6xl"></i>

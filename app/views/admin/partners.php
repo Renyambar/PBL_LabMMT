@@ -14,7 +14,7 @@
             <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
                 <div class="aspect-video bg-gray-100 flex items-center justify-center p-6">
                     <?php if ($partner['logo']): ?>
-                        <img src="<?= BASE_URL ?>/uploads/partners/<?= $partner['logo'] ?>" 
+                        <img src="<?= BASE_URL ?>/assets/img/<?= $partner['logo'] ?>" 
                              alt="<?= $partner['name'] ?>" 
                              class="max-w-full max-h-full object-contain">
                     <?php else: ?>
@@ -33,7 +33,7 @@
                     
                     <div class="flex gap-2 mt-4">
                         <a href="<?= BASE_URL ?>/admin/partners/edit/<?= $partner['id'] ?>" 
-                           class="flex-1 text-center bg-indigo-600 text-white px-3 py-2 rounded hover:bg-indigo-700 text-sm">
+                           class="flex-1 text-center bg-primary text-white px-3 py-2 rounded hover:bg-blue-700 text-sm">
                             <i class="fas fa-edit"></i> Ubah
                         </a>
                         <a href="<?= BASE_URL ?>/admin/partners/delete/<?= $partner['id'] ?>" 

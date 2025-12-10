@@ -138,7 +138,7 @@
                                             <form action="<?= BASE_URL ?>/admin/comments_unapprove/<?= $comment['id'] ?>" method="POST" class="inline">
                                                 <button type="submit" 
                                                         onclick="return confirm('Unapprove this comment?')"
-                                                        class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition"
+                                                        class="bg-secondary text-white px-3 py-1 rounded hover:bg-blue-600 transition"
                                                         title="Unapprove">
                                                     <i class="fas fa-times-circle"></i>
                                                 </button>
@@ -147,7 +147,7 @@
                                             <form action="<?= BASE_URL ?>/admin/comments_approve/<?= $comment['id'] ?>" method="POST" class="inline">
                                                 <button type="submit" 
                                                         onclick="return confirm('Approve this comment?')"
-                                                        class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 transition"
+                                                        class="bg-primary text-white px-3 py-1 rounded hover:bg-blue-700 transition"
                                                         title="Approve">
                                                     <i class="fas fa-check-circle"></i>
                                                 </button>
