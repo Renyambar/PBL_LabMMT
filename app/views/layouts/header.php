@@ -34,7 +34,7 @@
                 <div class="hidden md:flex space-x-4 text-gray-600">
                     <a href="<?= BASE_URL ?>" class="text-gray-700 hover:text-primary transition">Beranda</a>
                     <a href="<?= BASE_URL ?>/project" class="text-gray-700 hover:text-primary transition">Proyek</a>
-                    <a href="<?= BASE_URL ?>/article" class="text-gray-700 hover:text-primary transition">Artikel</a>
+                    <a href="<?= BASE_URL ?>/article" class="text-gray-700 hover:text-primary transition">Artikel & Publikasi</a>
                     <a href="<?= BASE_URL ?>/gallery" class="text-gray-700 hover:text-primary transition">Galeri</a>
                     <a href="<?= BASE_URL ?>/home/about" class="text-gray-700 hover:text-primary transition">Profil</a>
                     <a href="<?= BASE_URL ?>/home/contact" class="text-gray-700 hover:text-primary transition">Kontak</a>

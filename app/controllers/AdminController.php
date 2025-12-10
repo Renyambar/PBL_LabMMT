@@ -8,6 +8,7 @@ class AdminController extends Controller
     private $partnerModel;
     private $userModel;
     private $commentModel;
+    private $publicationModel;
 
     public function __construct()
     {
@@ -20,6 +21,7 @@ class AdminController extends Controller
         $this->partnerModel = $this->model('Partner');
         $this->userModel = $this->model('User');
         $this->commentModel = $this->model('ProjectComment');
+        $this->publicationModel = $this->model('Publication');
     }
 
     // Dashboard
@@ -592,5 +594,194 @@ class AdminController extends Controller
             $_SESSION['error'] = 'Failed to delete comment';
         }
         $this->redirect('admin/comments');
+    }
+
+    // Publications Management
+    public function publications()
+    {
+        $data = [
+            'title' => 'Kelola Publikasi - ' . APP_NAME,
+            'publications' => $this->publicationModel->getAll()
+        ];
+
+        $this->view('admin/publications', $data);
+    }
+
+    public function createPublication()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Generate slug
+            $slug = $this->publicationModel->generateSlug($_POST['title']);
+            $counter = 1;
+            while ($this->publicationModel->slugExists($slug)) {
+                $slug = $this->publicationModel->generateSlug($_POST['title']) . '-' . $counter;
+                $counter++;
+            }
+
+            // Handle PDF file upload
+            $pdfFile = null;
+            if (isset($_FILES['pdf_file']) && $_FILES['pdf_file']['error'] == 0) {
+                $allowed = ['pdf'];
+                $filename = $_FILES['pdf_file']['name'];
+                $fileTmp = $_FILES['pdf_file']['tmp_name'];
+                $fileExt = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+                if (in_array($fileExt, $allowed)) {
+                    $newFilename = 'publication_' . uniqid() . '.pdf';
+                    $uploadPath = '../public/assets/pdf/publications/';
+                    
+                    if (!is_dir($uploadPath)) {
+                        mkdir($uploadPath, 0755, true);
+                    }
+
+                    if (move_uploaded_file($fileTmp, $uploadPath . $newFilename)) {
+                        $pdfFile = $newFilename;
+                    }
+                }
+            }
+
+            $publicationData = [
+                'title' => $_POST['title'],
+                'slug' => $slug,
+                'authors' => $_POST['authors'],
+                'abstract' => $_POST['abstract'],
+                'publication_type' => $_POST['publication_type'],
+                'journal_name' => $_POST['journal_name'] ?? null,
+                'conference_name' => $_POST['conference_name'] ?? null,
+                'publisher' => $_POST['publisher'] ?? null,
+                'publication_date' => $_POST['publication_date'] ?? null,
+                'volume' => $_POST['volume'] ?? null,
+                'issue' => $_POST['issue'] ?? null,
+                'pages' => $_POST['pages'] ?? null,
+                'doi' => $_POST['doi'] ?? null,
+                'isbn' => $_POST['isbn'] ?? null,
+                'issn' => $_POST['issn'] ?? null,
+                'url' => $_POST['url'] ?? null,
+                'pdf_file' => $pdfFile,
+                'keywords' => $_POST['keywords'] ?? null,
+                'citation_count' => $_POST['citation_count'] ?? 0,
+                'created_by' => $_SESSION['user_id']
+            ];
+
+            if ($this->publicationModel->create($publicationData)) {
+                $_SESSION['message'] = 'Publikasi berhasil ditambahkan!';
+                $this->redirect('admin/publications');
+            } else {
+                $_SESSION['error'] = 'Gagal menambahkan publikasi';
+            }
+        }
+
+        $data = [
+            'title' => 'Tambah Publikasi - ' . APP_NAME,
+            'types' => $this->publicationModel->getTypes()
+        ];
+
+        $this->view('admin/publication_form', $data);
+    }
+
+    public function editPublication($id)
+    {
+        $publication = $this->publicationModel->getById($id);
+
+        if (!$publication) {
+            $_SESSION['error'] = 'Publikasi tidak ditemukan';
+            $this->redirect('admin/publications');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Generate slug
+            $slug = $this->publicationModel->generateSlug($_POST['title']);
+            $counter = 1;
+            while ($this->publicationModel->slugExists($slug, $id)) {
+                $slug = $this->publicationModel->generateSlug($_POST['title']) . '-' . $counter;
+                $counter++;
+            }
+
+            // Handle PDF file upload
+            $pdfFile = $publication->pdf_file;
+            if (isset($_FILES['pdf_file']) && $_FILES['pdf_file']['error'] == 0) {
+                $allowed = ['pdf'];
+                $filename = $_FILES['pdf_file']['name'];
+                $fileTmp = $_FILES['pdf_file']['tmp_name'];
+                $fileExt = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+                if (in_array($fileExt, $allowed)) {
+                    // Delete old PDF
+                    if ($pdfFile && file_exists('../public/assets/pdf/publications/' . $pdfFile)) {
+                        unlink('../public/assets/pdf/publications/' . $pdfFile);
+                    }
+
+                    $newFilename = 'publication_' . uniqid() . '.pdf';
+                    $uploadPath = '../public/assets/pdf/publications/';
+                    
+                    if (!is_dir($uploadPath)) {
+                        mkdir($uploadPath, 0755, true);
+                    }
+
+                    if (move_uploaded_file($fileTmp, $uploadPath . $newFilename)) {
+                        $pdfFile = $newFilename;
+                    }
+                }
+            }
+
+            $publicationData = [
+                'title' => $_POST['title'],
+                'slug' => $slug,
+                'authors' => $_POST['authors'],
+                'abstract' => $_POST['abstract'],
+                'publication_type' => $_POST['publication_type'],
+                'journal_name' => $_POST['journal_name'] ?? null,
+                'conference_name' => $_POST['conference_name'] ?? null,
+                'publisher' => $_POST['publisher'] ?? null,
+                'publication_date' => $_POST['publication_date'] ?? null,
+                'volume' => $_POST['volume'] ?? null,
+                'issue' => $_POST['issue'] ?? null,
+                'pages' => $_POST['pages'] ?? null,
+                'doi' => $_POST['doi'] ?? null,
+                'isbn' => $_POST['isbn'] ?? null,
+                'issn' => $_POST['issn'] ?? null,
+                'url' => $_POST['url'] ?? null,
+                'pdf_file' => $pdfFile,
+                'keywords' => $_POST['keywords'] ?? null,
+                'citation_count' => $_POST['citation_count'] ?? 0
+            ];
+
+            if ($this->publicationModel->update($id, $publicationData)) {
+                $_SESSION['message'] = 'Publikasi berhasil diperbarui!';
+                $this->redirect('admin/publications');
+            } else {
+                $_SESSION['error'] = 'Gagal memperbarui publikasi';
+            }
+        }
+
+        $data = [
+            'title' => 'Edit Publikasi - ' . APP_NAME,
+            'publication' => $publication,
+            'types' => $this->publicationModel->getTypes()
+        ];
+
+        $this->view('admin/publication_form', $data);
+    }
+
+    public function deletePublication($id)
+    {
+        $publication = $this->publicationModel->getById($id);
+
+        if ($publication) {
+            // Delete PDF file if exists
+            if ($publication->pdf_file && file_exists('../public/assets/pdf/publications/' . $publication->pdf_file)) {
+                unlink('../public/assets/pdf/publications/' . $publication->pdf_file);
+            }
+
+            if ($this->publicationModel->delete($id)) {
+                $_SESSION['message'] = 'Publikasi berhasil dihapus!';
+            } else {
+                $_SESSION['error'] = 'Gagal menghapus publikasi';
+            }
+        } else {
+            $_SESSION['error'] = 'Publikasi tidak ditemukan';
+        }
+
+        $this->redirect('admin/publications');
     }
 }

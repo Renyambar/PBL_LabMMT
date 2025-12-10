@@ -46,6 +46,10 @@
                     <i class="fas fa-newspaper"></i>
                     <span>Artikel</span>
                 </a>
+                <a href="<?= BASE_URL ?>/admin/publications" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition mb-2">
+                    <i class="fas fa-book"></i>
+                    <span>Publikasi</span>
+                </a>
                 <a href="<?= BASE_URL ?>/admin/gallery" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition mb-2">
                     <i class="fas fa-images"></i>
                     <span>Galeri</span>

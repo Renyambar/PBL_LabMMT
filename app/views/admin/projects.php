@@ -2,7 +2,7 @@
 
 <div class="flex justify-between items-center mb-6">
     <h3 class="text-2xl font-bold">Semua Proyek</h3>
-    <a href="<?= BASE_URL ?>/project/create" class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
+    <a href="<?= BASE_URL ?>/admin/projects/create" class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
         <i class="fas fa-plus mr-2"></i>Tambah Proyek Baru
     </a>
 </div>

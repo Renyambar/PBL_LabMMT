@@ -3,11 +3,13 @@
 class ArticleController extends Controller
 {
     private $articleModel;
+    private $publicationModel;
 
     public function __construct()
     {
         parent::__construct();
         $this->articleModel = $this->model('Article');
+        $this->publicationModel = $this->model('Publication');
     }
 
     // Display all articles
@@ -21,9 +23,13 @@ class ArticleController extends Controller
             $articles = $this->articleModel->getAll();
         }
 
+        // Get all publications
+        $publications = $this->publicationModel->getAll();
+
         $data = [
-            'title' => 'Articles - ' . APP_NAME,
+            'title' => 'Artikel & Publikasi Ilmiah - ' . APP_NAME,
             'articles' => $articles,
+            'publications' => $publications,
             'search' => $search
         ];
 

@@ -2,9 +2,9 @@
 
 // Database Configuration
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'lab_mmt');
+define('DB_NAME', 'lab_multimedia');
 define('DB_USER', 'postgres');
-define('DB_PASS', 'zemoteno');
+define('DB_PASS', '87654321');
 define('DB_PORT', '5432');
 
 // App Configuration
