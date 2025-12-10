@@ -34,14 +34,18 @@
         <?php if (!empty($galleries)): ?>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <?php foreach ($galleries as $item): ?>
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition group">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition group cursor-pointer"
+                         onclick="openMedia('<?= $item['media_type'] ?>', '<?= BASE_URL ?>/assets/img/<?= $item['file_path'] ?>', '<?= addslashes($item['title']) ?>', '<?= addslashes($item['description'] ?? '') ?>')">
                         <div class="h-64 bg-gray-300 relative overflow-hidden">
                             <?php if ($item['media_type'] == 'image'): ?>
                                 <img src="<?= BASE_URL ?>/assets/img/<?= $item['file_path'] ?>" 
                                      alt="<?= $item['title'] ?>" 
                                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                             <?php else: ?>
-                                <div class="flex items-center justify-center h-full bg-gray-800">
+                                <video class="w-full h-full object-cover" muted>
+                                    <source src="<?= BASE_URL ?>/assets/img/<?= $item['file_path'] ?>" type="video/<?= pathinfo($item['file_path'], PATHINFO_EXTENSION) ?>">
+                                </video>
+                                <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40">
                                     <i class="fas fa-play-circle text-white text-6xl"></i>
                                 </div>
                             <?php endif; ?>
@@ -53,6 +57,10 @@
                                     <?php if ($item['description']): ?>
                                         <p class="text-sm"><?= substr($item['description'], 0, 60) ?>...</p>
                                     <?php endif; ?>
+                                    <p class="text-xs mt-2">
+                                        <i class="fas fa-<?= $item['media_type'] == 'image' ? 'search-plus' : 'play' ?> mr-1"></i>
+                                        Klik untuk <?= $item['media_type'] == 'image' ? 'memperbesar' : 'memutar' ?>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -80,5 +88,81 @@
         <?php endif; ?>
     </div>
 </section>
+
+<!-- Media Modal -->
+<div id="mediaModal" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center p-4">
+    <div class="max-w-6xl w-full">
+        <div class="flex justify-end mb-4">
+            <button onclick="closeMedia()" class="text-white hover:text-gray-300 text-3xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div id="mediaContent" class="bg-white rounded-lg overflow-hidden">
+            <!-- Content will be inserted here -->
+        </div>
+        
+        <div id="mediaInfo" class="text-white mt-4 text-center">
+            <h3 id="mediaTitle" class="text-2xl font-bold mb-2"></h3>
+            <p id="mediaDescription" class="text-gray-300"></p>
+        </div>
+    </div>
+</div>
+
+<script>
+function openMedia(type, path, title, description) {
+    const modal = document.getElementById('mediaModal');
+    const content = document.getElementById('mediaContent');
+    const titleEl = document.getElementById('mediaTitle');
+    const descEl = document.getElementById('mediaDescription');
+    
+    titleEl.textContent = title;
+    descEl.textContent = description;
+    
+    if (type === 'image') {
+        content.innerHTML = `<img src="${path}" alt="${title}" class="w-full h-auto max-h-[80vh] object-contain">`;
+    } else {
+        content.innerHTML = `
+            <video controls autoplay class="w-full h-auto max-h-[80vh]" controlsList="nodownload">
+                <source src="${path}" type="video/${path.split('.').pop()}">
+                Browser Anda tidak mendukung video.
+            </video>
+        `;
+    }
+    
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeMedia() {
+    const modal = document.getElementById('mediaModal');
+    const content = document.getElementById('mediaContent');
+    
+    // Stop video if playing
+    const video = content.querySelector('video');
+    if (video) {
+        video.pause();
+        video.currentTime = 0;
+    }
+    
+    modal.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+    content.innerHTML = '';
+}
+
+// Close on ESC key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeMedia();
+    }
+});
+
+// Close when clicking outside
+document.getElementById('mediaModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeMedia();
+    }
+});
+</script>
 
 <?php require_once '../app/views/layouts/footer.php'; ?>

@@ -67,7 +67,11 @@
             <?php endif; ?>
             <input type="file" name="file" accept="image/*,video/*" <?= !isset($gallery) ? 'required' : '' ?>
                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
-            <p class="text-sm text-gray-500 mt-1">Ukuran maks: 5MB untuk gambar, 20MB untuk video</p>
+            <p class="text-sm text-gray-500 mt-1">
+                <i class="fas fa-info-circle mr-1"></i>
+                Ukuran maks: <strong>5MB untuk gambar</strong>, <strong>50MB untuk video</strong><br>
+                Format yang didukung: JPG, PNG, GIF, WEBP (gambar) | MP4, AVI, MOV, WMV, MKV, WEBM (video)
+            </p>
         </div>
 
         <!-- Submit Buttons -->

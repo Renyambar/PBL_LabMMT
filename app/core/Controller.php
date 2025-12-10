@@ -79,21 +79,32 @@ class Controller
         $targetFile = $uploadDir . $fileName;
         $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-        // Check file size (5MB max)
-        if ($file['size'] > 5000000) {
-            return ['success' => false, 'message' => 'File terlalu besar. Maksimal 5MB.'];
+        // Check file type first to determine max size
+        $videoTypes = ['mp4', 'avi', 'mov', 'wmv', 'flv', 'mkv', 'webm'];
+        $imageTypes = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'];
+        $allowedTypes = array_merge($imageTypes, $videoTypes);
+        
+        if (!in_array($fileType, $allowedTypes)) {
+            return ['success' => false, 'message' => 'Format file tidak diizinkan. Format yang didukung: ' . implode(', ', $allowedTypes)];
         }
 
-        // Allow certain file formats
-        $allowedTypes = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'mp4', 'avi', 'mov'];
-        if (!in_array($fileType, $allowedTypes)) {
-            return ['success' => false, 'message' => 'Format file tidak diizinkan.'];
+        // Different size limits for images and videos
+        if (in_array($fileType, $videoTypes)) {
+            // Video max 50MB
+            if ($file['size'] > 50000000) {
+                return ['success' => false, 'message' => 'File video terlalu besar. Maksimal 50MB.'];
+            }
+        } else {
+            // Image max 5MB
+            if ($file['size'] > 5000000) {
+                return ['success' => false, 'message' => 'File gambar terlalu besar. Maksimal 5MB.'];
+            }
         }
 
         if (move_uploaded_file($file['tmp_name'], $targetFile)) {
             return ['success' => true, 'filename' => $targetDir . $fileName];
         } else {
-            return ['success' => false, 'message' => 'Gagal upload file.'];
+            return ['success' => false, 'message' => 'Gagal upload file. Pastikan folder memiliki permission yang benar.'];
         }
     }
 }

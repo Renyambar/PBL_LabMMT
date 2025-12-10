@@ -5,7 +5,7 @@
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-3xl font-bold mb-2">Selamat Datang, <?= $_SESSION['user_name'] ?? 'Admin' ?>! 👋</h1>
-            <p class="opacity-90">Kelola konten Lab MMT dengan mudah melalui dashboard ini</p>
+            <p class="opacity-90">Kelola konten Laboratorium Multimedia dan Mobile Technology dengan mudah melalui dashboard ini</p>
         </div>
         <div class="hidden md:block">
             <i class="fas fa-chart-line text-6xl opacity-20"></i>
