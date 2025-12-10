@@ -60,7 +60,20 @@ class Database
             $stmt = $this->conn->prepare($query);
             return $stmt->execute($params);
         } catch (PDOException $e) {
+            // Log error dengan detail lengkap
             error_log("Database Execute Error: " . $e->getMessage());
+            error_log("Query: " . $query);
+            error_log("Params: " . print_r($params, true));
+            
+            // Tampilkan error ke user jika development mode
+            if (defined('APP_ENV') && APP_ENV === 'development') {
+                echo "<div style='background:#f8d7da;color:#721c24;padding:15px;margin:10px;border:1px solid #f5c6cb;border-radius:5px;'>";
+                echo "<strong>Database Error:</strong> " . htmlspecialchars($e->getMessage()) . "<br>";
+                echo "<strong>Query:</strong> " . htmlspecialchars($query) . "<br>";
+                echo "<strong>Params:</strong> <pre>" . htmlspecialchars(print_r($params, true)) . "</pre>";
+                echo "</div>";
+            }
+            
             return false;
         }
     }

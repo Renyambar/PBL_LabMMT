@@ -92,7 +92,14 @@ class ProjectController extends Controller
                 'title' => $_POST['title'],
                 'description' => $_POST['description'],
                 'category' => $_POST['category'],
-                'tags' => $_POST['tags'],
+                'tags' => $_POST['tags'] ?? null,
+                'team_name' => $_POST['team_name'] ?? null,
+                'team_members' => $_POST['team_members'] ?? null,
+                'supervisor' => $_POST['supervisor'] ?? null,
+                'client' => $_POST['client'] ?? null,
+                'technologies' => $_POST['technologies'] ?? null,
+                'github_url' => $_POST['github_url'] ?? null,
+                'demo_url' => $_POST['demo_url'] ?? null,
                 'video_url' => $_POST['video_url'] ?? null,
                 'thumbnail' => null
             ];
@@ -149,7 +156,14 @@ class ProjectController extends Controller
                 'title' => $_POST['title'],
                 'description' => $_POST['description'],
                 'category' => $_POST['category'],
-                'tags' => $_POST['tags'],
+                'tags' => $_POST['tags'] ?? null,
+                'team_name' => $_POST['team_name'] ?? null,
+                'team_members' => $_POST['team_members'] ?? null,
+                'supervisor' => $_POST['supervisor'] ?? null,
+                'client' => $_POST['client'] ?? null,
+                'technologies' => $_POST['technologies'] ?? null,
+                'github_url' => $_POST['github_url'] ?? null,
+                'demo_url' => $_POST['demo_url'] ?? null,
                 'video_url' => $_POST['video_url'] ?? null,
                 'thumbnail' => $project['thumbnail']
             ];

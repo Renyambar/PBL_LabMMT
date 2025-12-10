@@ -111,11 +111,16 @@ class AdminController extends Controller
             $data = [
                 'title' => $_POST['title'],
                 'description' => $_POST['description'],
-                'full_description' => $_POST['full_description'] ?? null,
                 'category' => $_POST['category'],
-                'technologies' => $_POST['technologies'],
-                'project_url' => $_POST['project_url'] ?? null,
+                'tags' => $_POST['tags'] ?? null,
+                'team_name' => $_POST['team_name'] ?? null,
+                'team_members' => $_POST['team_members'] ?? null,
+                'supervisor' => $_POST['supervisor'] ?? null,
+                'client' => $_POST['client'] ?? null,
+                'technologies' => $_POST['technologies'] ?? null,
                 'github_url' => $_POST['github_url'] ?? null,
+                'demo_url' => $_POST['demo_url'] ?? null,
+                'video_url' => $_POST['video_url'] ?? null,
                 'thumbnail' => null
             ];
 
@@ -158,11 +163,16 @@ class AdminController extends Controller
             $data = [
                 'title' => $_POST['title'],
                 'description' => $_POST['description'],
-                'full_description' => $_POST['full_description'] ?? null,
                 'category' => $_POST['category'],
-                'technologies' => $_POST['technologies'],
-                'project_url' => $_POST['project_url'] ?? null,
+                'tags' => $_POST['tags'] ?? null,
+                'team_name' => $_POST['team_name'] ?? null,
+                'team_members' => $_POST['team_members'] ?? null,
+                'supervisor' => $_POST['supervisor'] ?? null,
+                'client' => $_POST['client'] ?? null,
+                'technologies' => $_POST['technologies'] ?? null,
                 'github_url' => $_POST['github_url'] ?? null,
+                'demo_url' => $_POST['demo_url'] ?? null,
+                'video_url' => $_POST['video_url'] ?? null,
                 'thumbnail' => $project['thumbnail']
             ];
 

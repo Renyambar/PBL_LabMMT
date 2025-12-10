@@ -49,52 +49,171 @@
 
                     <h1 class="text-4xl font-bold mb-6"><?= $project['title'] ?></h1>
 
-                    <?php if (!empty($project['team_name']) || !empty($project['team_members'])): ?>
-                    <!-- Team Info -->
-                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-[#0F3A75] rounded-lg p-5 mb-6">
-                        <div class="flex items-start">
-                            <div class="bg-[#0F3A75] text-white rounded-full p-3 mr-4">
-                                <i class="fas fa-users text-xl"></i>
-                            </div>
-                            <div class="flex-1">
-                                <?php if (!empty($project['team_name'])): ?>
-                                <h3 class="text-lg font-bold text-gray-800 mb-2"><?= $project['team_name'] ?></h3>
-                                <?php endif; ?>
-                                
-                                <?php if (!empty($project['team_members'])): ?>
-                                <div class="text-sm text-gray-600 mb-1 font-semibold">Anggota Tim:</div>
-                                <div class="flex flex-wrap gap-2">
-                                    <?php 
-                                    // Split by newline or comma
-                                    $members = preg_split('/[\n,]+/', $project['team_members']);
-                                    foreach ($members as $member): 
-                                        $member = trim($member);
-                                        if (!empty($member)):
-                                    ?>
-                                        <span class="inline-flex items-center bg-white text-gray-700 px-3 py-1 rounded-full text-sm border border-gray-200">
-                                            <i class="fas fa-user text-[#0F3A75] mr-2 text-xs"></i>
-                                            <?= htmlspecialchars($member) ?>
-                                        </span>
-                                    <?php 
-                                        endif;
-                                    endforeach; 
-                                    ?>
+                    <!-- Project Info Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        
+                        <!-- Team Info Card -->
+                        <?php if (!empty($project['team_name']) || !empty($project['team_members'])): ?>
+                        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-[#0F3A75] rounded-lg p-5">
+                            <div class="flex items-start">
+                                <div class="bg-[#0F3A75] text-white rounded-full p-3 mr-4 flex-shrink-0">
+                                    <i class="fas fa-users text-xl"></i>
                                 </div>
-                                <?php endif; ?>
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-sm font-semibold text-gray-500 uppercase mb-2">Tim Pengembang</h3>
+                                    <?php if (!empty($project['team_name'])): ?>
+                                    <p class="text-xl font-bold text-gray-800 mb-3"><?= htmlspecialchars($project['team_name']) ?></p>
+                                    <?php endif; ?>
+                                    
+                                    <?php if (!empty($project['team_members'])): ?>
+                                    <div class="text-xs text-gray-600 mb-2 font-semibold">Anggota Tim:</div>
+                                    <div class="flex flex-wrap gap-2">
+                                        <?php 
+                                        $members = array_filter(array_map('trim', preg_split('/[\n,]+/', $project['team_members'])));
+                                        foreach ($members as $member): 
+                                        ?>
+                                            <span class="inline-flex items-center bg-white text-gray-700 px-3 py-1 rounded-full text-sm border border-gray-200">
+                                                <i class="fas fa-user text-[#0F3A75] mr-2 text-xs"></i>
+                                                <?= htmlspecialchars($member) ?>
+                                            </span>
+                                        <?php endforeach; ?>
+                                    </div>
+                                    <?php endif; ?>
+                                </div>
                             </div>
+                        </div>
+                        <?php endif; ?>
+
+                        <!-- Supervisor & Client Card -->
+                        <?php if (!empty($project['supervisor']) || !empty($project['client'])): ?>
+                        <div class="bg-gradient-to-r from-green-50 to-teal-50 border-l-4 border-green-600 rounded-lg p-5">
+                            <div class="flex items-start">
+                                <div class="bg-green-600 text-white rounded-full p-3 mr-4 flex-shrink-0">
+                                    <i class="fas fa-user-tie text-xl"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-sm font-semibold text-gray-500 uppercase mb-3">Pembimbing & Klien</h3>
+                                    <div class="space-y-3">
+                                        <?php if (!empty($project['supervisor'])): ?>
+                                        <div>
+                                            <div class="text-xs text-gray-600 mb-1 font-semibold">Pembimbing:</div>
+                                            <div class="flex items-center text-gray-800">
+                                                <i class="fas fa-chalkboard-teacher text-green-600 mr-2"></i>
+                                                <span class="font-semibold"><?= htmlspecialchars($project['supervisor']) ?></span>
+                                            </div>
+                                        </div>
+                                        <?php endif; ?>
+                                        
+                                        <?php if (!empty($project['client'])): ?>
+                                        <div>
+                                            <div class="text-xs text-gray-600 mb-1 font-semibold">Klien:</div>
+                                            <div class="flex items-center text-gray-800">
+                                                <i class="fas fa-building text-green-600 mr-2"></i>
+                                                <span class="font-semibold"><?= htmlspecialchars($project['client']) ?></span>
+                                            </div>
+                                        </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <!-- Technologies & Links Row -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        
+                        <!-- Technologies Card -->
+                        <?php if (!empty($project['technologies'])): ?>
+                        <div class="bg-gradient-to-r from-orange-50 to-amber-50 border-l-4 border-orange-600 rounded-lg p-5">
+                            <div class="flex items-start">
+                                <div class="bg-orange-600 text-white rounded-full p-3 mr-4 flex-shrink-0">
+                                    <i class="fas fa-laptop-code text-xl"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-sm font-semibold text-gray-500 uppercase mb-3">Teknologi Utama</h3>
+                                    <div class="flex flex-wrap gap-2">
+                                        <?php 
+                                        $technologies = array_filter(array_map('trim', preg_split('/[\n,]+/', $project['technologies'])));
+                                        foreach ($technologies as $tech): 
+                                        ?>
+                                            <span class="inline-flex items-center bg-white text-orange-700 px-3 py-1 rounded-full text-sm border border-orange-200 font-medium">
+                                                <i class="fas fa-cog text-orange-600 mr-2 text-xs"></i>
+                                                <?= htmlspecialchars($tech) ?>
+                                            </span>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+
+                        <!-- GitHub & Links Card -->
+                        <?php if (!empty($project['github_url']) || !empty($project['demo_url'])): ?>
+                        <div class="bg-gradient-to-r from-purple-50 to-pink-50 border-l-4 border-purple-600 rounded-lg p-5">
+                            <div class="flex items-start">
+                                <div class="bg-purple-600 text-white rounded-full p-3 mr-4 flex-shrink-0">
+                                    <i class="fas fa-link text-xl"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-sm font-semibold text-gray-500 uppercase mb-3">Link Proyek</h3>
+                                    <div class="space-y-2">
+                                        <?php if (!empty($project['github_url'])): ?>
+                                        <a href="<?= htmlspecialchars($project['github_url']) ?>" 
+                                           target="_blank"
+                                           class="flex items-center text-gray-700 hover:text-gray-900 group">
+                                            <i class="fab fa-github text-2xl mr-3 text-gray-600 group-hover:text-black transition flex-shrink-0"></i>
+                                            <div class="flex-1 min-w-0">
+                                                <div class="font-semibold text-sm">GitHub Repository</div>
+                                                <div class="text-xs text-gray-500 group-hover:text-blue-600 transition truncate">
+                                                    <?= htmlspecialchars($project['github_url']) ?>
+                                                </div>
+                                            </div>
+                                            <i class="fas fa-external-link-alt ml-2 text-gray-400 group-hover:text-blue-600 flex-shrink-0"></i>
+                                        </a>
+                                        <?php endif; ?>
+                                        
+                                        <?php if (!empty($project['demo_url'])): ?>
+                                        <a href="<?= htmlspecialchars($project['demo_url']) ?>" 
+                                           target="_blank"
+                                           class="flex items-center text-gray-700 hover:text-gray-900 group">
+                                            <i class="fas fa-globe text-2xl mr-3 text-gray-600 group-hover:text-blue-600 transition flex-shrink-0"></i>
+                                            <div class="flex-1 min-w-0">
+                                                <div class="font-semibold text-sm">Live Demo</div>
+                                                <div class="text-xs text-gray-500 group-hover:text-blue-600 transition truncate">
+                                                    <?= htmlspecialchars($project['demo_url']) ?>
+                                                </div>
+                                            </div>
+                                            <i class="fas fa-external-link-alt ml-2 text-gray-400 group-hover:text-blue-600 flex-shrink-0"></i>
+                                        </a>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <!-- Tags / Additional Info -->
+                    <?php if (!empty($project['tags'])): ?>
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-3 flex items-center">
+                            <i class="fas fa-tags text-[#0F3A75] mr-2"></i>
+                            Tags & Kategori
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <?php 
+                            $tags = array_filter(array_map('trim', explode(',', $project['tags'])));
+                            foreach ($tags as $tag): 
+                            ?>
+                                <span class="inline-flex items-center bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-sm hover:shadow-md transition">
+                                    <i class="fas fa-hashtag mr-2 text-xs"></i>
+                                    <?= htmlspecialchars($tag) ?>
+                                </span>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                     <?php endif; ?>
-
-                    <!-- Tags -->
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <?php 
-                        $tags = explode(',', $project['tags']);
-                        foreach ($tags as $tag): 
-                        ?>
-                            <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded"><?= trim($tag) ?></span>
-                        <?php endforeach; ?>
-                    </div>
 
                     <!-- Description -->
                     <div class="prose max-w-none mb-8">

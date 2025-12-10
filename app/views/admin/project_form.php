@@ -12,125 +12,199 @@
     <form action="<?= isset($project) ? BASE_URL . '/admin/projects/update/' . $project['id'] : BASE_URL . '/admin/projects/store' ?>" 
           method="POST" enctype="multipart/form-data">
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Title -->
-            <div class="md:col-span-2">
-                <label class="block text-gray-700 font-semibold mb-2">
-                    <i class="fas fa-heading mr-2"></i>Judul Proyek *
-                </label>
-                <input type="text" name="title" required
-                       value="<?= $project['title'] ?? '' ?>"
-                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                       placeholder="Masukkan judul proyek">
-            </div>
+        <!-- Section 1: Basic Information -->
+        <div class="mb-8">
+            <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-info-circle text-blue-600 mr-2"></i>
+                Informasi Dasar
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Title -->
+                <div class="md:col-span-2">
+                    <label class="block text-gray-700 font-semibold mb-2">
+                        <i class="fas fa-heading mr-2"></i>Judul Proyek *
+                    </label>
+                    <input type="text" name="title" required
+                           value="<?= $project['title'] ?? '' ?>"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                           placeholder="Masukkan judul proyek">
+                </div>
 
-            <!-- Category -->
-            <div>
-                <label class="block text-gray-700 font-semibold mb-2">
-                    <i class="fas fa-folder mr-2"></i>Kategori *
-                </label>
-                <select name="category" required
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
-                    <option value="">Pilih Kategori</option>
-                    <option value="Mobile Development" <?= (($project['category'] ?? '') == 'Mobile Development') ? 'selected' : '' ?>>Mobile Development</option>
-                    <option value="Web Development" <?= (($project['category'] ?? '') == 'Web Development') ? 'selected' : '' ?>>Web Development</option>
-                    <option value="IoT" <?= (($project['category'] ?? '') == 'IoT') ? 'selected' : '' ?>>IoT</option>
-                    <option value="AI/ML" <?= (($project['category'] ?? '') == 'AI/ML') ? 'selected' : '' ?>>AI/ML</option>
-                    <option value="Game Development" <?= (($project['category'] ?? '') == 'Game Development') ? 'selected' : '' ?>>Game Development</option>
-                </select>
-            </div>
+                <!-- Category -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">
+                        <i class="fas fa-folder mr-2"></i>Kategori *
+                    </label>
+                    <select name="category" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                        <option value="">Pilih Kategori</option>
+                        <option value="Mobile Development" <?= (($project['category'] ?? '') == 'Mobile Development') ? 'selected' : '' ?>>Mobile Development</option>
+                        <option value="Web Development" <?= (($project['category'] ?? '') == 'Web Development') ? 'selected' : '' ?>>Web Development</option>
+                        <option value="IoT" <?= (($project['category'] ?? '') == 'IoT') ? 'selected' : '' ?>>IoT</option>
+                        <option value="AI/ML" <?= (($project['category'] ?? '') == 'AI/ML') ? 'selected' : '' ?>>AI/ML</option>
+                        <option value="Game Development" <?= (($project['category'] ?? '') == 'Game Development') ? 'selected' : '' ?>>Game Development</option>
+                    </select>
+                </div>
 
-            <!-- Technologies -->
-            <div>
-                <label class="block text-gray-700 font-semibold mb-2">
-                    <i class="fas fa-code mr-2"></i>Teknologi *
-                </label>
-                <input type="text" name="technologies" required
-                       value="<?= $project['tags'] ?? '' ?>"
-                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                       placeholder="contoh: React, Node.js, MongoDB">
-            </div>
+                <!-- Tags -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">
+                        <i class="fas fa-tags mr-2"></i>Tags
+                    </label>
+                    <input type="text" name="tags"
+                           value="<?= $project['tags'] ?? '' ?>"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                           placeholder="Web, Mobile, Backend, Frontend">
+                    <p class="text-sm text-gray-500 mt-1">Pisahkan dengan koma</p>
+                </div>
 
-            <!-- Team Name -->
-            <div>
-                <label class="block text-gray-700 font-semibold mb-2">
-                    <i class="fas fa-users mr-2"></i>Nama Tim
-                </label>
-                <input type="text" name="team_name"
-                       value="<?= $project['team_name'] ?? '' ?>"
-                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                       placeholder="contoh: Tim Inovasi Digital">
+                <!-- Description -->
+                <div class="md:col-span-2">
+                    <label class="block text-gray-700 font-semibold mb-2">
+                        <i class="fas fa-align-left mr-2"></i>Deskripsi Singkat *
+                    </label>
+                    <textarea name="description" required rows="3"
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                              placeholder="Deskripsi singkat proyek (200-300 karakter)"><?= $project['description'] ?? '' ?></textarea>
+                </div>
             </div>
+        </div>
 
-            <!-- Team Members -->
-            <div class="md:col-span-2">
-                <label class="block text-gray-700 font-semibold mb-2">
-                    <i class="fas fa-user-friends mr-2"></i>Anggota Tim
-                </label>
-                <textarea name="team_members" rows="3"
-                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                          placeholder="Masukkan nama anggota tim, pisahkan dengan koma atau enter&#10;contoh:&#10;Ahmad Rifai&#10;Siti Nurhaliza&#10;Budi Santoso"><?= $project['team_members'] ?? '' ?></textarea>
-                <p class="text-sm text-gray-500 mt-1">Pisahkan setiap anggota dengan enter (baris baru) atau koma</p>
+        <!-- Section 2: Team Information -->
+        <div class="mb-8">
+            <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-users text-blue-600 mr-2"></i>
+                Informasi Tim
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Team Name -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">
+                        <i class="fas fa-users mr-2"></i>Nama Tim
+                    </label>
+                    <input type="text" name="team_name"
+                           value="<?= $project['team_name'] ?? '' ?>"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                           placeholder="contoh: Tim Inovasi Digital">
+                </div>
+
+                <!-- Supervisor -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">
+                        <i class="fas fa-chalkboard-teacher mr-2"></i>Dosen Pembimbing
+                    </label>
+                    <input type="text" name="supervisor"
+                           value="<?= $project['supervisor'] ?? '' ?>"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                           placeholder="contoh: Dr. Budi Santoso, M.Kom">
+                </div>
+
+                <!-- Client -->
+                <div class="md:col-span-2">
+                    <label class="block text-gray-700 font-semibold mb-2">
+                        <i class="fas fa-building mr-2"></i>Klien / Mitra
+                    </label>
+                    <input type="text" name="client"
+                           value="<?= $project['client'] ?? '' ?>"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                           placeholder="contoh: PT. Teknologi Indonesia">
+                </div>
+
+                <!-- Team Members -->
+                <div class="md:col-span-2">
+                    <label class="block text-gray-700 font-semibold mb-2">
+                        <i class="fas fa-user-friends mr-2"></i>Anggota Tim
+                    </label>
+                    <textarea name="team_members" rows="3"
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                              placeholder="Masukkan nama anggota tim, pisahkan dengan koma atau enter&#10;contoh:&#10;Ahmad Rifai&#10;Siti Nurhaliza&#10;Budi Santoso"><?= $project['team_members'] ?? '' ?></textarea>
+                    <p class="text-sm text-gray-500 mt-1">Pisahkan setiap anggota dengan enter (baris baru) atau koma</p>
+                </div>
             </div>
+        </div>
 
-            <!-- Description -->
-            <div class="md:col-span-2">
-                <label class="block text-gray-700 font-semibold mb-2">
-                    <i class="fas fa-align-left mr-2"></i>Deskripsi *
-                </label>
-                <textarea name="description" required rows="4"
-                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                          placeholder="Deskripsi singkat proyek"><?= substr($project['description'] ?? '', 0, 200) ?></textarea>
+        <!-- Section 3: Technical Information -->
+        <div class="mb-8">
+            <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-laptop-code text-orange-600 mr-2"></i>
+                Informasi Teknis
+            </h3>
+            <div class="grid grid-cols-1 gap-6">
+                <!-- Technologies -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">
+                        <i class="fas fa-code mr-2"></i>Teknologi yang Digunakan *
+                    </label>
+                    <textarea name="technologies" required rows="3"
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                              placeholder="Masukkan teknologi yang digunakan, pisahkan dengan koma atau enter&#10;contoh:&#10;React.js&#10;Node.js&#10;PostgreSQL&#10;Tailwind CSS"><?= $project['technologies'] ?? '' ?></textarea>
+                    <p class="text-sm text-gray-500 mt-1">Pisahkan dengan enter (baris baru) atau koma. Contoh: React, Node.js, PostgreSQL</p>
+                </div>
             </div>
+        </div>
 
-            <!-- Full Description -->
-            <div class="md:col-span-2">
-                <label class="block text-gray-700 font-semibold mb-2">
-                    <i class="fas fa-file-alt mr-2"></i>Deskripsi Lengkap
-                </label>
-                <textarea name="full_description" rows="8"
-                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                          placeholder="Deskripsi detail, fitur, dan detail implementasi"><?= $project['description'] ?? '' ?></textarea>
+        <!-- Section 4: Links & URLs -->
+        <div class="mb-8">
+            <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-link text-purple-600 mr-2"></i>
+                Link & URL
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- GitHub URL -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">
+                        <i class="fab fa-github mr-2"></i>URL GitHub Repository
+                    </label>
+                    <input type="url" name="github_url"
+                           value="<?= $project['github_url'] ?? '' ?>"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                           placeholder="https://github.com/username/repo">
+                </div>
+
+                <!-- Demo URL -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">
+                        <i class="fas fa-external-link-alt mr-2"></i>URL Demo / Live Website
+                    </label>
+                    <input type="url" name="demo_url"
+                           value="<?= $project['demo_url'] ?? '' ?>"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                           placeholder="https://demo.example.com">
+                </div>
             </div>
+        </div>
 
-            <!-- Project URL -->
-            <div>
-                <label class="block text-gray-700 font-semibold mb-2">
-                    <i class="fas fa-link mr-2"></i>URL Proyek
-                </label>
-                <input type="url" name="project_url"
-                       value="<?= $project['video_url'] ?? '' ?>"
-                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                       placeholder="https://example.com">
-            </div>
+        <!-- Section 5: Media -->
+        <div class="mb-8">
+            <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-image text-green-600 mr-2"></i>
+                Media & Gambar
+            </h3>
+            <div class="grid grid-cols-1 gap-6">
 
-            <!-- GitHub URL -->
-            <div>
-                <label class="block text-gray-700 font-semibold mb-2">
-                    <i class="fab fa-github mr-2"></i>URL GitHub
-                </label>
-                <input type="url" name="github_url"
-                       value=""
-                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                       placeholder="https://github.com/username/repo">
-            </div>
-
-            <!-- Thumbnail -->
-            <div class="md:col-span-2">
-                <label class="block text-gray-700 font-semibold mb-2">
-                    <i class="fas fa-image mr-2"></i>Gambar Thumbnail
-                </label>
-                <?php if (isset($project['thumbnail']) && $project['thumbnail']): ?>
-                    <div class="mb-3">
-                        <img src="<?= BASE_URL ?>/uploads/projects/<?= $project['thumbnail'] ?>" 
-                             alt="Thumbnail saat ini" 
-                             class="h-32 w-auto rounded border">
-                        <p class="text-sm text-gray-500 mt-1">Gambar saat ini</p>
+                <!-- Thumbnail -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">
+                        <i class="fas fa-image mr-2"></i>Gambar Thumbnail *
+                    </label>
+                    <?php if (isset($project['thumbnail']) && $project['thumbnail']): ?>
+                        <div class="mb-3 p-4 bg-gray-50 rounded-lg">
+                            <img src="<?= BASE_URL ?>/assets/img/<?= $project['thumbnail'] ?>" 
+                                 alt="Thumbnail saat ini" 
+                                 class="h-40 w-auto rounded-lg shadow-md mx-auto">
+                            <p class="text-sm text-gray-600 mt-2 text-center">Gambar saat ini</p>
+                        </div>
+                    <?php endif; ?>
+                    <div class="mt-2">
+                        <input type="file" name="thumbnail" accept="image/*" <?= !isset($project) ? 'required' : '' ?>
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                        <p class="text-sm text-gray-500 mt-2">
+                            <i class="fas fa-info-circle mr-1"></i>Ukuran maks: 5MB. Format: JPG, PNG, GIF
+                        </p>
                     </div>
-                <?php endif; ?>
-                <input type="file" name="thumbnail" accept="image/*"
-                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
-                <p class="text-sm text-gray-500 mt-1">Ukuran maks: 5MB. Format: JPG, PNG, GIF</p>
+                </div>
             </div>
         </div>
 

@@ -66,14 +66,16 @@
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2"><?= $project['title'] ?></h3>
                             <p class="text-gray-600 mb-4"><?= substr($project['description'], 0, 120) ?>...</p>
+                            <?php if (!empty($project['tags'])): ?>
                             <div class="flex flex-wrap gap-2 mb-4">
                                 <?php 
-                                $tags = explode(',', $project['tags']);
+                                $tags = array_filter(array_map('trim', explode(',', $project['tags'])));
                                 foreach (array_slice($tags, 0, 3) as $tag): 
                                 ?>
-                                    <span class="bg-gray-200 text-gray-700 px-2 py-1 rounded text-sm"><?= trim($tag) ?></span>
+                                    <span class="bg-gray-200 text-gray-700 px-2 py-1 rounded text-sm"><?= htmlspecialchars($tag) ?></span>
                                 <?php endforeach; ?>
                             </div>
+                            <?php endif; ?>
                             <a href="<?= BASE_URL ?>/project/detail/<?= $project['slug'] ?>" class="text-primary hover:text-blue-700 font-semibold">
                                 Lihat Detail <i class="fas fa-arrow-right ml-1"></i>
                             </a>

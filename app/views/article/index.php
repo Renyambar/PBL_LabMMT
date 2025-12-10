@@ -54,9 +54,16 @@ $hasMore = $totalArticles > $articlesPerPage;
                     <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 hover:-translate-y-1">
 
                         <!-- Image-->
-                        <div class="h-48 relative overflow-hidden">
-                            <img src="/Lab-MMT/public/assets/img/articles/articles-proto.jpg"
-                                 alt="" class="w-full h-full object-cover" style="object-position: center 10%;">
+                        <div class="h-48 relative overflow-hidden bg-gray-200">
+                            <?php if (!empty($article['thumbnail'])): ?>
+                                <img src="<?= BASE_URL ?>/assets/img/<?= $article['thumbnail'] ?>"
+                                     alt="<?= htmlspecialchars($article['title']) ?>" 
+                                     class="w-full h-full object-cover">
+                            <?php else: ?>
+                                <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-200">
+                                    <i class="fas fa-newspaper text-blue-300 text-6xl"></i>
+                                </div>
+                            <?php endif; ?>
                         </div>
 
                         <!-- Content -->

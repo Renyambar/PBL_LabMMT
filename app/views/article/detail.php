@@ -9,10 +9,13 @@
         </a>
 
         <article class="bg-white shadow-md rounded-xl overflow-hidden">
+            <?php if (!empty($article['thumbnail'])): ?>
             <div class="h-96 overflow-hidden">
-                <img src="/Lab-MMT/public/assets/img/articles/articles-proto.jpg"
-                     class="object-cover w-full h-full" style="object-position: center 10%;">
+                <img src="<?= BASE_URL ?>/assets/img/<?= $article['thumbnail'] ?>"
+                     alt="<?= htmlspecialchars($article['title']) ?>"
+                     class="object-cover w-full h-full">
             </div>
+            <?php endif; ?>
 
             <div class="p-10">
                 <div class="flex items-center text-gray-600 mb-6">

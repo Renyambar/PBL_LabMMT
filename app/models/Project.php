@@ -47,18 +47,25 @@ class Project
     // Create new project
     public function create($data)
     {
-        $query = "INSERT INTO projects (title, slug, description, category, tags, thumbnail, video_url, team_name, team_members) 
-                  VALUES (:title, :slug, :description, :category, :tags, :thumbnail, :video_url, :team_name, :team_members)";
+        $query = "INSERT INTO projects (title, slug, description, category, tags, thumbnail, video_url, 
+                  team_name, team_members, supervisor, client, technologies, github_url, demo_url) 
+                  VALUES (:title, :slug, :description, :category, :tags, :thumbnail, :video_url, 
+                  :team_name, :team_members, :supervisor, :client, :technologies, :github_url, :demo_url)";
         $params = [
             'title' => $data['title'],
             'slug' => $this->generateSlug($data['title']),
             'description' => $data['description'],
             'category' => $data['category'],
-            'tags' => $data['tags'],
+            'tags' => $data['tags'] ?? null,
             'thumbnail' => $data['thumbnail'] ?? null,
             'video_url' => $data['video_url'] ?? null,
             'team_name' => $data['team_name'] ?? null,
-            'team_members' => $data['team_members'] ?? null
+            'team_members' => $data['team_members'] ?? null,
+            'supervisor' => $data['supervisor'] ?? null,
+            'client' => $data['client'] ?? null,
+            'technologies' => $data['technologies'] ?? null,
+            'github_url' => $data['github_url'] ?? null,
+            'demo_url' => $data['demo_url'] ?? null
         ];
         return $this->db->execute($query, $params);
     }
@@ -68,18 +75,25 @@ class Project
     {
         $query = "UPDATE projects SET title = :title, slug = :slug, description = :description, 
                   category = :category, tags = :tags, thumbnail = :thumbnail, video_url = :video_url, 
-                  team_name = :team_name, team_members = :team_members, updated_at = CURRENT_TIMESTAMP WHERE id = :id";
+                  team_name = :team_name, team_members = :team_members, supervisor = :supervisor, 
+                  client = :client, technologies = :technologies, github_url = :github_url, 
+                  demo_url = :demo_url, updated_at = CURRENT_TIMESTAMP WHERE id = :id";
         $params = [
             'id' => $id,
             'title' => $data['title'],
             'slug' => $this->generateSlug($data['title']),
             'description' => $data['description'],
             'category' => $data['category'],
-            'tags' => $data['tags'],
+            'tags' => $data['tags'] ?? null,
             'thumbnail' => $data['thumbnail'],
             'video_url' => $data['video_url'] ?? null,
             'team_name' => $data['team_name'] ?? null,
-            'team_members' => $data['team_members'] ?? null
+            'team_members' => $data['team_members'] ?? null,
+            'supervisor' => $data['supervisor'] ?? null,
+            'client' => $data['client'] ?? null,
+            'technologies' => $data['technologies'] ?? null,
+            'github_url' => $data['github_url'] ?? null,
+            'demo_url' => $data['demo_url'] ?? null
         ];
         return $this->db->execute($query, $params);
     }

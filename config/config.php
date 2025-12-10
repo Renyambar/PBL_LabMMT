@@ -10,6 +10,7 @@ define('DB_PORT', '5432');
 // App Configuration
 define('BASE_URL', 'http://localhost/PBL_LabMMT/public');
 define('APP_NAME', 'Portal Showcase Lab MMT');
+define('APP_ENV', 'development'); // Set to 'production' when live
 
 // Session Configuration
 if (session_status() === PHP_SESSION_NONE) {
