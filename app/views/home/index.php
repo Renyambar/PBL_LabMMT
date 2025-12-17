@@ -156,13 +156,23 @@
         <div class="flex justify-center items-center gap-12 flex-wrap">
             <?php foreach ($partners as $index => $partner): ?>
                 <div class="flex flex-col items-center" data-aos="flip-left" data-aos-delay="<?= $index * 100 ?>">
-                    <div class="w-24 h-24 rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-lg transition border-2 border-gray-100">
-                        <?php if ($partner['logo']): ?>
-                            <img src="<?= BASE_URL ?>/assets/img/<?= $partner['logo'] ?>" alt="<?= $partner['name'] ?>" class="w-16 h-16 object-contain">
-                        <?php else: ?>
-                            <i class="fas fa-building text-gray-400 text-3xl"></i>
-                        <?php endif; ?>
-                    </div>
+                    <?php if (!empty($partner['website'])): ?>
+                        <a href="<?= $partner['website'] ?>" target="_blank" rel="noopener noreferrer" class="w-24 h-24 rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-lg transition border-2 border-gray-100 hover:border-gray-400">
+                            <?php if ($partner['logo']): ?>
+                                <img src="<?= BASE_URL ?>/assets/img/<?= $partner['logo'] ?>" alt="<?= $partner['name'] ?>" class="w-16 h-16 object-contain">
+                            <?php else: ?>
+                                <i class="fas fa-building text-gray-400 text-3xl"></i>
+                            <?php endif; ?>
+                        </a>
+                    <?php else: ?>
+                        <div class="w-24 h-24 rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-lg transition border-2 border-gray-100">
+                            <?php if ($partner['logo']): ?>
+                                <img src="<?= BASE_URL ?>/assets/img/<?= $partner['logo'] ?>" alt="<?= $partner['name'] ?>" class="w-16 h-16 object-contain">
+                            <?php else: ?>
+                                <i class="fas fa-building text-gray-400 text-3xl"></i>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
                     <span class="text-xs text-gray-600 mt-2 text-center"><?= $partner['name'] ?></span>
                 </div>
             <?php endforeach; ?>

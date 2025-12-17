@@ -56,9 +56,12 @@ class AdminController extends Controller
     // Manage Articles
     public function articles()
     {
+        $search = $_GET['search'] ?? '';
+        $articles = !empty($search) ? $this->articleModel->search($search) : $this->articleModel->getAll();
+        
         $data = [
             'title' => 'Manage Articles - ' . APP_NAME,
-            'articles' => $this->articleModel->getAll()
+            'articles' => $articles
         ];
 
         $this->view('admin/articles', $data);
@@ -78,6 +81,8 @@ class AdminController extends Controller
     // Manage Partners
     public function partners()
     {
+        $this->requireAdmin();
+        
         $data = [
             'title' => 'Manage Partners - ' . APP_NAME,
             'partners' => $this->partnerModel->getAll()
@@ -484,12 +489,14 @@ class AdminController extends Controller
     
     public function partners_create()
     {
+        $this->requireAdmin();
         $data = ['title' => 'Add Partner - ' . APP_NAME];
         $this->view('admin/partner_form', $data);
     }
 
     public function partners_store()
     {
+        $this->requireAdmin();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = [
                 'name' => $_POST['name'],
@@ -515,6 +522,7 @@ class AdminController extends Controller
 
     public function partners_edit($id)
     {
+        $this->requireAdmin();
         $partner = $this->partnerModel->getById($id);
         if (!$partner) {
             $this->redirect('admin/partners');
@@ -530,6 +538,7 @@ class AdminController extends Controller
 
     public function partners_update($id)
     {
+        $this->requireAdmin();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $partner = $this->partnerModel->getById($id);
             
@@ -557,6 +566,7 @@ class AdminController extends Controller
 
     public function partners_delete($id)
     {
+        $this->requireAdmin();
         if ($this->partnerModel->delete($id)) {
             $_SESSION['message'] = 'Partner deleted successfully!';
         } else {
@@ -802,6 +812,7 @@ class AdminController extends Controller
     // Edit Lab Profile
     public function lab_profile()
     {
+        $this->requireAdmin();
         $data = [
             'title' => 'Edit Profil Lab - ' . APP_NAME,
             'profile' => $this->labProfileModel->getProfile(),
@@ -814,6 +825,7 @@ class AdminController extends Controller
     // Update Lab Profile
     public function lab_profile_update()
     {
+        $this->requireAdmin();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Get current profile to get ID
             $profile = $this->labProfileModel->getProfile();
@@ -848,6 +860,7 @@ class AdminController extends Controller
     // Add Team Member
     public function team_member_create()
     {
+        $this->requireAdmin();
         $data = [
             'title' => 'Tambah Anggota Tim - ' . APP_NAME
         ];
@@ -858,6 +871,7 @@ class AdminController extends Controller
     // Store Team Member
     public function team_member_store()
     {
+        $this->requireAdmin();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Handle photo upload
             $photoPath = null;
@@ -890,6 +904,7 @@ class AdminController extends Controller
     // Edit Team Member
     public function team_member_edit($id)
     {
+        $this->requireAdmin();
         $data = [
             'title' => 'Edit Anggota Tim - ' . APP_NAME,
             'member' => $this->labProfileModel->getTeamMemberById($id)
@@ -901,6 +916,7 @@ class AdminController extends Controller
     // Update Team Member
     public function team_member_update($id)
     {
+        $this->requireAdmin();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $member = $this->labProfileModel->getTeamMemberById($id);
             
@@ -939,6 +955,7 @@ class AdminController extends Controller
     // Delete Team Member
     public function team_member_delete($id)
     {
+        $this->requireAdmin();
         $member = $this->labProfileModel->getTeamMemberById($id);
         
         if ($member) {
@@ -948,7 +965,7 @@ class AdminController extends Controller
             }
 
             if ($this->labProfileModel->deleteTeamMember($id)) {
-                $_SESSION['message'] = 'Anggota tim berhasil dihapus!';
+                $_SESSION['success'] = 'Anggota tim berhasil dihapus!';
             } else {
                 $_SESSION['error'] = 'Gagal menghapus anggota tim';
             }

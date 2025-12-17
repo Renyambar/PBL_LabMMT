@@ -11,8 +11,8 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#1D4ED8',
-                        secondary: '#3B82F6',
+                        primary: '#0F3A75',
+                        secondary: '#1e5a9e',
                     }
                 }
             }
@@ -20,84 +20,91 @@
     </script>
     <style>
         .sidebar-link.active {
-            background: linear-gradient(135deg, #1D4ED8 0%, #3B82F6 100%);
-            box-shadow: 0 4px 6px -1px rgba(29, 78, 216, 0.3);
+            background-color: #0F3A75;
+            color: white;
         }
         .sidebar-link:hover {
-            background-color: rgba(59, 130, 246, 0.1);
+            background-color: #f3f4f6;
+        }
+        .sidebar-link.active:hover {
+            background-color: #0d3263;
         }
     </style>
 </head>
 <body class="bg-gray-50">
     <div class="flex h-screen">
         <!-- Sidebar -->
-        <aside class="w-64 bg-white border-r border-gray-200 flex flex-col shadow-lg">
-            <div class="p-6 border-b border-gray-200 bg-gradient-to-r from-primary to-secondary">
+        <aside class="w-64 bg-white border-r border-gray-200 flex flex-col">
+            <div class="p-6 border-b border-gray-200 bg-[#0F3A75]">
                 <div class="flex items-center space-x-3">
-                    <img src="<?= BASE_URL ?>/assets/img/favicon.ico" alt="Logo Lab MMT" class="h-12 w-12 object-contain">
+                    <img src="<?= BASE_URL ?>/assets/img/favicon.ico" alt="Logo Lab MMT" class="h-10 w-10 object-contain">
                     <div class="text-white">
-                        <h1 class="text-lg font-bold">Lab MMT</h1>
-                        <p class="text-xs opacity-90">Admin Panel</p>
+                        <h1 class="text-base font-semibold">Lab MMT</h1>
+                        <p class="text-xs opacity-80">Panel Admin</p>
                     </div>
                 </div>
             </div>
 
             <nav class="flex-1 p-4 overflow-y-auto">
-                <a href="<?= BASE_URL ?>/admin" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-lg transition mb-2 text-gray-700 hover:text-primary">
-                    <i class="fas fa-dashboard w-5"></i>
-                    <span class="font-medium">Dashboard</span>
-                </a>
-                <a href="<?= BASE_URL ?>/admin/lab_profile" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-lg transition mb-2 text-gray-700 hover:text-primary">
-                    <i class="fas fa-building w-5"></i>
-                    <span class="font-medium">Profil Lab</span>
-                </a>
-                <a href="<?= BASE_URL ?>/admin/projects" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-lg transition mb-2 text-gray-700 hover:text-primary">
-                    <i class="fas fa-project-diagram w-5"></i>
-                    <span class="font-medium">Proyek</span>
-                </a>
-                <a href="<?= BASE_URL ?>/admin/articles" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-lg transition mb-2 text-gray-700 hover:text-primary">
-                    <i class="fas fa-newspaper w-5"></i>
-                    <span class="font-medium">Artikel</span>
-                </a>
-                <a href="<?= BASE_URL ?>/admin/publications" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-lg transition mb-2 text-gray-700 hover:text-primary">
-                    <i class="fas fa-book w-5"></i>
-                    <span class="font-medium">Publikasi</span>
-                </a>
-                <a href="<?= BASE_URL ?>/admin/gallery" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-lg transition mb-2 text-gray-700 hover:text-primary">
-                    <i class="fas fa-images w-5"></i>
-                    <span class="font-medium">Galeri</span>
-                </a>
-                <a href="<?= BASE_URL ?>/admin/partners" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-lg transition mb-2 text-gray-700 hover:text-primary">
-                    <i class="fas fa-handshake w-5"></i>
-                    <span class="font-medium">Mitra</span>
-                </a>
-                <a href="<?= BASE_URL ?>/admin/comments" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-lg transition mb-2 text-gray-700 hover:text-primary">
-                    <i class="fas fa-comments w-5"></i>
-                    <span class="font-medium">Komentar</span>
+                <a href="<?= BASE_URL ?>/admin" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md transition mb-1 text-gray-700">
+                    <i class="fas fa-th-large w-5"></i>
+                    <span class="text-sm">Dashboard</span>
                 </a>
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                <a href="<?= BASE_URL ?>/admin/users" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-lg transition mb-2 text-gray-700 hover:text-primary">
+                <a href="<?= BASE_URL ?>/admin/lab_profile" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md transition mb-1 text-gray-700">
+                    <i class="fas fa-building w-5"></i>
+                    <span class="text-sm">Profil Lab</span>
+                </a>
+                <?php endif; ?>
+                <a href="<?= BASE_URL ?>/admin/projects" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md transition mb-1 text-gray-700">
+                    <i class="fas fa-folder w-5"></i>
+                    <span class="text-sm">Proyek</span>
+                </a>
+                <a href="<?= BASE_URL ?>/admin/articles" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md transition mb-1 text-gray-700">
+                    <i class="fas fa-newspaper w-5"></i>
+                    <span class="text-sm">Artikel</span>
+                </a>
+                <a href="<?= BASE_URL ?>/admin/publications" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md transition mb-1 text-gray-700">
+                    <i class="fas fa-book w-5"></i>
+                    <span class="text-sm">Publikasi</span>
+                </a>
+                <a href="<?= BASE_URL ?>/admin/gallery" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md transition mb-1 text-gray-700">
+                    <i class="fas fa-image w-5"></i>
+                    <span class="text-sm">Galeri</span>
+                </a>
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                <a href="<?= BASE_URL ?>/admin/partners" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md transition mb-1 text-gray-700">
+                    <i class="fas fa-handshake w-5"></i>
+                    <span class="text-sm">Mitra</span>
+                </a>
+                <?php endif; ?>
+                <a href="<?= BASE_URL ?>/admin/comments" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md transition mb-1 text-gray-700">
+                    <i class="fas fa-comment w-5"></i>
+                    <span class="text-sm">Komentar</span>
+                </a>
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                <a href="<?= BASE_URL ?>/admin/users" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md transition mb-1 text-gray-700">
                     <i class="fas fa-users w-5"></i>
-                    <span class="font-medium">Pengguna</span>
+                    <span class="text-sm">Pengguna</span>
                 </a>
                 <?php endif; ?>
             </nav>
 
-            <div class="p-4 border-t border-gray-200 bg-gray-50">
-                <div class="flex items-center space-x-3 mb-3 p-3 bg-white rounded-lg shadow-sm">
-                    <div class="bg-gradient-to-br from-primary to-secondary text-white rounded-full w-10 h-10 flex items-center justify-center">
-                        <i class="fas fa-user"></i>
+            <div class="p-4 border-t border-gray-200">
+                <div class="flex items-center space-x-3 mb-3 p-2">
+                    <div class="bg-[#0F3A75] text-white rounded-full w-9 h-9 flex items-center justify-center">
+                        <i class="fas fa-user text-sm"></i>
                     </div>
                     <div class="flex-1">
-                        <p class="text-sm font-semibold text-gray-800"><?= $_SESSION['user_name'] ?? 'User' ?></p>
+                        <p class="text-sm font-medium text-gray-800"><?= $_SESSION['user_name'] ?? 'User' ?></p>
                         <p class="text-xs text-gray-500 capitalize"><?= $_SESSION['role'] ?? 'guest' ?></p>
                     </div>
                 </div>
-                <a href="<?= BASE_URL ?>" class="block text-center bg-white border border-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-50 transition mb-2">
-                    <i class="fas fa-home mr-2"></i>Lihat Website
+                <a href="<?= BASE_URL ?>" class="block text-center bg-white border border-gray-300 text-gray-700 py-2 rounded-md hover:bg-gray-50 transition mb-2 text-sm">
+                    <i class="fas fa-home mr-2 text-xs"></i>Website
                 </a>
-                <a href="<?= BASE_URL ?>/auth/logout" class="block text-center bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition">
-                    <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                <a href="<?= BASE_URL ?>/auth/logout" class="block text-center bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition text-sm">
+                    <i class="fas fa-sign-out-alt mr-2 text-xs"></i>Logout
                 </a>
             </div>
         </aside>
