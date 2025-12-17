@@ -19,16 +19,16 @@ class ProjectRating
     // Get average rating for a project
     public function getAverageRating($project_id)
     {
-        $query = "SELECT get_project_avg_rating(:project_id) as avg_rating";
-        $result = $this->db->fetch($query, ['project_id' => $project_id]);
+        $query = "SELECT get_project_avg_rating($1) as avg_rating";
+        $result = $this->db->fetch($query, [$project_id]);
         return $result['avg_rating'] ?? 0;
     }
 
     // Get rating count for a project
     public function getRatingCount($project_id)
     {
-        $query = "SELECT get_project_rating_count(:project_id) as count";
-        $result = $this->db->fetch($query, ['project_id' => $project_id]);
+        $query = "SELECT get_project_rating_count($1) as count";
+        $result = $this->db->fetch($query, [$project_id]);
         return $result['count'] ?? 0;
     }
 

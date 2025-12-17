@@ -47,6 +47,10 @@
                     <i class="fas fa-dashboard w-5"></i>
                     <span class="font-medium">Dashboard</span>
                 </a>
+                <a href="<?= BASE_URL ?>/admin/lab_profile" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-lg transition mb-2 text-gray-700 hover:text-primary">
+                    <i class="fas fa-building w-5"></i>
+                    <span class="font-medium">Profil Lab</span>
+                </a>
                 <a href="<?= BASE_URL ?>/admin/projects" class="sidebar-link flex items-center space-x-3 px-4 py-3 rounded-lg transition mb-2 text-gray-700 hover:text-primary">
                     <i class="fas fa-project-diagram w-5"></i>
                     <span class="font-medium">Proyek</span>

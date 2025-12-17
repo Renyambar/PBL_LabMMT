@@ -9,6 +9,7 @@ class AdminController extends Controller
     private $userModel;
     private $commentModel;
     private $publicationModel;
+    private $labProfileModel;
 
     public function __construct()
     {
@@ -22,6 +23,7 @@ class AdminController extends Controller
         $this->userModel = $this->model('User');
         $this->commentModel = $this->model('ProjectComment');
         $this->publicationModel = $this->model('Publication');
+        $this->labProfileModel = $this->model('LabProfile');
     }
 
     // Dashboard
@@ -793,5 +795,165 @@ class AdminController extends Controller
         }
 
         $this->redirect('admin/publications');
+    }
+
+    // ============ LAB PROFILE MANAGEMENT ============
+    
+    // Edit Lab Profile
+    public function lab_profile()
+    {
+        $data = [
+            'title' => 'Edit Profil Lab - ' . APP_NAME,
+            'profile' => $this->labProfileModel->getProfile(),
+            'team_members' => $this->labProfileModel->getTeamMembers()
+        ];
+
+        $this->view('admin/lab_profile', $data);
+    }
+
+    // Update Lab Profile
+    public function lab_profile_update()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Get current profile to get ID
+            $profile = $this->labProfileModel->getProfile();
+            
+            if (!$profile) {
+                $_SESSION['error'] = 'Profil lab tidak ditemukan';
+                $this->redirect('admin/lab_profile');
+                return;
+            }
+            
+            // Convert mission array to JSON
+            $missions = $_POST['mission'] ?? [];
+            $missions = array_filter($missions); // Remove empty items
+            
+            $data = [
+                'id' => $profile['id'],
+                'description' => trim($_POST['description']),
+                'vision' => trim($_POST['vision']),
+                'mission' => json_encode(array_values($missions))
+            ];
+
+            if ($this->labProfileModel->update($data)) {
+                $_SESSION['success'] = 'Profil lab berhasil diupdate!';
+            } else {
+                $_SESSION['error'] = 'Gagal mengupdate profil lab';
+            }
+        }
+
+        $this->redirect('admin/lab_profile');
+    }
+
+    // Add Team Member
+    public function team_member_create()
+    {
+        $data = [
+            'title' => 'Tambah Anggota Tim - ' . APP_NAME
+        ];
+
+        $this->view('admin/team_member_form', $data);
+    }
+
+    // Store Team Member
+    public function team_member_store()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Handle photo upload
+            $photoPath = null;
+            if (isset($_FILES['photo']) && $_FILES['photo']['error'] == 0) {
+                $upload = $this->uploadFile($_FILES['photo'], 'team/');
+                if ($upload['success']) {
+                    // Extract just the filename without the 'team/' prefix
+                    $photoPath = basename($upload['filename']);
+                }
+            }
+
+            $data = [
+                'name' => trim($_POST['name']),
+                'position' => trim($_POST['position']),
+                'photo' => $photoPath,
+                'is_head' => isset($_POST['is_head']),
+                'display_order' => (int)$_POST['display_order']
+            ];
+
+            if ($this->labProfileModel->addTeamMember($data)) {
+                $_SESSION['success'] = 'Anggota tim berhasil ditambahkan!';
+                $this->redirect('admin/lab_profile');
+            } else {
+                $_SESSION['error'] = 'Gagal menambahkan anggota tim';
+                $this->redirect('admin/team_member_create');
+            }
+        }
+    }
+
+    // Edit Team Member
+    public function team_member_edit($id)
+    {
+        $data = [
+            'title' => 'Edit Anggota Tim - ' . APP_NAME,
+            'member' => $this->labProfileModel->getTeamMemberById($id)
+        ];
+
+        $this->view('admin/team_member_form', $data);
+    }
+
+    // Update Team Member
+    public function team_member_update($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $member = $this->labProfileModel->getTeamMemberById($id);
+            
+            // Handle photo upload
+            $photoPath = $member['photo'];
+            if (isset($_FILES['photo']) && $_FILES['photo']['error'] == 0) {
+                // Delete old photo
+                if ($member['photo'] && file_exists('../public/assets/img/team/' . $member['photo'])) {
+                    unlink('../public/assets/img/team/' . $member['photo']);
+                }
+                $upload = $this->uploadFile($_FILES['photo'], 'team/');
+                if ($upload['success']) {
+                    // Extract just the filename without the 'team/' prefix
+                    $photoPath = basename($upload['filename']);
+                }
+            }
+
+            $data = [
+                'name' => trim($_POST['name']),
+                'position' => trim($_POST['position']),
+                'photo' => $photoPath,
+                'is_head' => isset($_POST['is_head']),
+                'display_order' => (int)$_POST['display_order']
+            ];
+
+            if ($this->labProfileModel->updateTeamMember($id, $data)) {
+                $_SESSION['success'] = 'Anggota tim berhasil diupdate!';
+            } else {
+                $_SESSION['error'] = 'Gagal mengupdate anggota tim';
+            }
+        }
+
+        $this->redirect('admin/lab_profile');
+    }
+
+    // Delete Team Member
+    public function team_member_delete($id)
+    {
+        $member = $this->labProfileModel->getTeamMemberById($id);
+        
+        if ($member) {
+            // Delete photo
+            if ($member['photo'] && file_exists('../public/assets/img/' . $member['photo'])) {
+                unlink('../public/assets/img/' . $member['photo']);
+            }
+
+            if ($this->labProfileModel->deleteTeamMember($id)) {
+                $_SESSION['message'] = 'Anggota tim berhasil dihapus!';
+            } else {
+                $_SESSION['error'] = 'Gagal menghapus anggota tim';
+            }
+        }
+
+        $this->redirect('admin/lab_profile');
     }
 }

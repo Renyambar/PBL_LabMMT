@@ -4,11 +4,11 @@
     <div class="container mx-auto px-4 max-w-5xl">
 
         <!-- Back -->
-        <a href="<?= BASE_URL ?>/article" class="inline-flex text-blue-600 hover:text-blue-700 mb-8 font-semibold">
+        <a href="<?= BASE_URL ?>/article" class="inline-flex text-blue-600 hover:text-blue-700 mb-8 font-semibold" data-aos="fade-right">
             <i class="fas fa-arrow-left mr-2"></i>Kembali ke Artikel
         </a>
 
-        <article class="bg-white shadow-md rounded-xl overflow-hidden">
+        <article class="bg-white shadow-md rounded-xl overflow-hidden" data-aos="fade-up">
             <?php if (!empty($article['thumbnail'])): ?>
             <div class="h-96 overflow-hidden">
                 <img src="<?= BASE_URL ?>/assets/img/<?= $article['thumbnail'] ?>"

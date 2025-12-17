@@ -2,7 +2,7 @@
 
 <!-- Page Header -->
 <section class="bg-gradient-to-r from-black/100 via-blue-800 to-blue-600 text-white py-16">
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto px-4" data-aos="fade-down">
         <h1 class="text-4xl font-bold mb-4">Portofolio Proyek</h1>
         <p class="text-xl">Koleksi karya dan inovasi digital dari Lab MMT</p>
     </div>
@@ -10,7 +10,7 @@
 
 <!-- Filter & Search Section -->
 <section class="py-8 bg-gray-100">
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto px-4" data-aos="fade-up">
         <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <!-- Search -->
             <form action="<?= BASE_URL ?>/project" method="GET" class="flex w-full md:w-auto">
@@ -48,9 +48,9 @@
                 <?php 
                 $maxDisplay = 9;
                 $displayProjects = array_slice($projects, 0, $maxDisplay);
-                foreach ($displayProjects as $project): 
+                foreach ($displayProjects as $index => $project): 
                 ?>
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition" data-aos="zoom-in" data-aos-delay="<?= $index * 100 ?>">
                         <div class="h-48 bg-gray-300 relative">
                             <?php if ($project['thumbnail']): ?>
                                 <img src="<?= BASE_URL ?>/assets/img/<?= $project['thumbnail'] ?>" alt="<?= $project['title'] ?>" class="w-full h-full object-cover">

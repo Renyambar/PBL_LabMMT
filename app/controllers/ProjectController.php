@@ -230,33 +230,55 @@ class ProjectController extends Controller
         $this->redirect('project/detail/' . $project['slug']);
     }
 
-    // Submit comment
+    // Submit comment - Public can comment
     public function comment($id)
     {
+        // Debug: Log that method was called
+        error_log("Comment method called with ID: " . $id);
+        error_log("POST data: " . print_r($_POST, true));
+        
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Validate comment
             if (empty($_POST['comment']) || strlen(trim($_POST['comment'])) < 10) {
-                $_SESSION['error'] = 'Comment must be at least 10 characters';
+                $_SESSION['error'] = 'Komentar harus minimal 10 karakter';
+                error_log("Validation failed: comment too short");
             } else {
+                // Set contributor name (default to Anonim if empty)
+                $contributorName = !empty(trim($_POST['contributor_name'])) ? trim($_POST['contributor_name']) : 'Anonim';
+                $contributorEmail = !empty(trim($_POST['contributor_email'])) ? trim($_POST['contributor_email']) : null;
+                
                 $data = [
-                    'project_id' => $id,
+                    'project_id' => (int)$id,
                     'user_id' => $_SESSION['user_id'] ?? null,
-                    'contributor_name' => $_POST['contributor_name'] ?? '',
-                    'contributor_email' => $_POST['contributor_email'] ?? '',
+                    'contributor_name' => $contributorName,
+                    'contributor_email' => $contributorEmail,
                     'comment' => trim($_POST['comment']),
                     'is_approved' => false // Require admin approval
                 ];
 
-                if ($this->commentModel->create($data)) {
-                    $_SESSION['message'] = 'Thank you for your comment! It will be published after approval.';
-                } else {
-                    $_SESSION['error'] = 'Failed to submit comment. Please try again.';
+                error_log("Attempting to create comment: " . print_r($data, true));
+
+                try {
+                    $result = $this->commentModel->create($data);
+                    error_log("Create result: " . ($result ? 'SUCCESS' : 'FAILED'));
+                    
+                    if ($result) {
+                        $_SESSION['message'] = 'Terima kasih atas komentar Anda! Komentar akan ditampilkan setelah disetujui admin.';
+                    } else {
+                        $_SESSION['error'] = 'Gagal mengirim komentar. Silakan coba lagi.';
+                    }
+                } catch (Exception $e) {
+                    $_SESSION['error'] = 'Error: ' . $e->getMessage();
+                    error_log("Comment error: " . $e->getMessage());
                 }
             }
+        } else {
+            error_log("Not POST request, method: " . $_SERVER['REQUEST_METHOD']);
         }
 
         // Redirect back to project detail
         $project = $this->projectModel->getById($id);
+        error_log("Redirecting to: project/detail/" . $project['slug']);
         $this->redirect('project/detail/' . $project['slug']);
     }
 }

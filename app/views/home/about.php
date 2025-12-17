@@ -2,7 +2,7 @@
 
 <!-- Page Header -->
 <section class="bg-gradient-to-r from-black/100 via-blue-800 to-blue-600 text-white py-16">
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto px-4" data-aos="fade-down">
         <h1 class="text-4xl font-bold mb-4">PROFIL LABORATORIUM</h1>
         <p class="text-xl">Laboratorium Multimedia & Mobile Technology</p>
     </div>
@@ -12,13 +12,13 @@
 <section class="py-16 bg-gray-50">
     <div class="container mx-auto px-4">
         <!-- Lab Introduction Card -->
-        <div class="max-w-6xl mx-auto mb-12">
+        <div class="max-w-6xl mx-auto mb-12" data-aos="fade-right">
             <div class="bg-white rounded-xl shadow-md overflow-hidden">
                 <div class="md:flex">
                     <div class="md:w-1/2 p-10">
                         <h2 class="text-3xl font-bold mb-4 text-[#0F3A75]">Laboratorium Multimedia & Mobile Technology</h2>
                         <p class="text-gray-700 leading-relaxed mb-4">
-                            Laboratorium Multimedia dan Mobile Technology merupakan salah satu laboratorium unggulan di Jurusan Teknologi Informasi Politeknik Negeri Malang. Laboratorium ini didirikan pada tahun 2015 dengan tujuan untuk memfasilitasi mahasiswa dalam mengembangkan keterampilan di bidang multimedia dan pengembangan aplikasi mobile.
+                            <?= htmlspecialchars($data['profile']['description'] ?? 'Laboratorium Multimedia dan Mobile Technology merupakan salah satu laboratorium unggulan di Jurusan Teknologi Informasi Politeknik Negeri Malang.') ?>
                         </p>
                     </div>
                     <div class="md:w-1/2">
@@ -29,7 +29,7 @@
         </div>
 
         <!-- Vision & Mission -->
-        <div class="max-w-6xl mx-auto mb-12">
+        <div class="max-w-6xl mx-auto mb-12" data-aos="fade-left">
             <div class="bg-white rounded-xl shadow-md p-10">
                 <h2 class="text-3xl font-bold mb-8 text-[#0F3A75]">Visi & Misi</h2>
                 
@@ -41,7 +41,7 @@
                         <div>
                             <h3 class="text-2xl font-bold mb-3 text-gray-800">Visi</h3>
                             <p class="text-gray-700 leading-relaxed">
-                                Menjadi laboratorium unggulan dalam pengembangan teknologi multimedia dan mobile yang inovatif, serta menghasilkan lulusan yang kompeten dan siap menghadapi tantangan industri digital.
+                                <?= htmlspecialchars($data['profile']['vision'] ?? 'Menjadi laboratorium unggulan dalam pengembangan teknologi multimedia dan mobile yang inovatif.') ?>
                             </p>
                         </div>
                     </div>
@@ -55,22 +55,12 @@
                         <div>
                             <h3 class="text-2xl font-bold mb-4 text-gray-800">Misi</h3>
                             <ul class="space-y-3">
+                                <?php foreach ($data['missions'] as $mission): ?>
                                 <li class="flex items-start">
                                     <i class="fas fa-check-circle text-blue-600 mr-3 mt-1"></i>
-                                    <span class="text-gray-700">Menyelenggarakan pendidikan dan pelatihan berbasis teknologi multimedia dan mobile yang berkualitas</span>
+                                    <span class="text-gray-700"><?= htmlspecialchars($mission) ?></span>
                                 </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-blue-600 mr-3 mt-1"></i>
-                                    <span class="text-gray-700">Melakukan penelitian dan pengembangan inovasi di bidang teknologi digital</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-blue-600 mr-3 mt-1"></i>
-                                    <span class="text-gray-700">Membangun kemitraan dengan industri untuk meningkatkan kompetensi mahasiswa</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-blue-600 mr-3 mt-1"></i>
-                                    <span class="text-gray-700">Menghasilkan karya dan publikasi ilmiah yang bermanfaat bagi masyarakat</span>
-                                </li>
+                                <?php endforeach; ?>
                             </ul>
                         </div>
                     </div>
@@ -185,70 +175,61 @@
         <div class="max-w-6xl mx-auto">
             <h2 class="text-3xl font-bold mb-8 text-[#0F3A75] text-center">Anggota Tim</h2>
             
+            <?php 
+            // Separate head and members
+            $heads = array_filter($data['team_members'], function($member) {
+                return $member['is_head'];
+            });
+            $members = array_filter($data['team_members'], function($member) {
+                return !$member['is_head'];
+            });
+            ?>
+
             <!-- Head of Lab -->
+            <?php if (!empty($heads)): ?>
             <div class="flex justify-center mb-8">
-                <div class="bg-white rounded-lg shadow-md p-6 text-center w-64 team-member-card">
+                <?php foreach ($heads as $head): ?>
+                <div class="bg-white rounded-lg shadow-md p-6 text-center w-64 team-member-card mx-2">
                     <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden bg-gray-200">
-                        <img src="/PBL_LabMMT/public/assets/img/partners/dimas-wahyu.jpg" alt="Dimas Wahyu Wibowo" class="w-full h-full object-cover" style="object-position: center 20%;">
+                        <?php if ($head['photo']): ?>
+                        <img src="<?= BASE_URL ?>/assets/img/team/<?= htmlspecialchars($head['photo']) ?>" 
+                             alt="<?= htmlspecialchars($head['name']) ?>" 
+                             class="w-full h-full object-cover" style="object-position: center top;">
+                        <?php else: ?>
+                        <div class="w-full h-full flex items-center justify-center bg-gray-300">
+                            <i class="fas fa-user fa-3x text-gray-500"></i>
+                        </div>
+                        <?php endif; ?>
                     </div>
-                    <h4 class="font-bold text-gray-800 mb-1">Dimas Wahyu Wibowo, ST., MT.</h4>
-                    <p class="text-blue-600 text-sm font-semibold">Kepala Lab</p>
+                    <h4 class="font-bold text-gray-800 mb-1"><?= htmlspecialchars($head['name']) ?></h4>
+                    <p class="text-blue-600 text-sm font-semibold"><?= htmlspecialchars($head['position']) ?></p>
                 </div>
+                <?php endforeach; ?>
             </div>
+            <?php endif; ?>
 
             <!-- Team Members Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="bg-white rounded-lg shadow-md p-6 text-center team-member-card">
-                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden bg-gray-200">
-                        <img src="/PBL_LabMMT/public/assets/img/partners/eka-larasati.jpg" alt="Eka Larasati Amalia" class="w-full h-full object-cover"style="object-position: center 10%;">
-                    </div>
-                    <h4 class="font-bold text-gray-800 mb-1">Eka Larasati Amalia, S.ST., MT.</h4>
-                    <p class="text-blue-600 text-sm">Peneliti</p>
-                </div>
-
-                <div class="bg-white rounded-lg shadow-md p-6 text-center team-member-card">
-                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden bg-gray-200">
-                        <img src="/PBL_LabMMT/public/assets/img/partners/cahya-rahmad.jpg" alt="Prof. Dr. Eng. Cahya Rahmad" class="w-full h-full object-cover"style="object-position: center 10%;">
-                    </div>
-                    <h4 class="font-bold text-gray-800 mb-1">Prof. Dr. Eng. Cahya Rahmad, ST., M.Kom.</h4>
-                    <p class="text-blue-600 text-sm">Peneliti</p>
-                </div>
-
-                <div class="bg-white rounded-lg shadow-md p-6 text-center team-member-card">
-                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden bg-gray-200">
-                        <img src="/PBL_LabMMT/public/assets/img/partners/adevian-fairuz.jpg" alt="Adevian Fairuz Pratama" class="w-full h-full object-cover"style="object-position: center 10%;">
-                    </div>
-                    <h4 class="font-bold text-gray-800 mb-1">Adevian Fairuz Pratama, S.S T., M.Eng.</h4>
-                    <p class="text-blue-600 text-sm">Peneliti</p>
-                </div>
-            </div>
-
-            <!-- Additional Team Members -->
+            <?php if (!empty($members)): ?>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <?php foreach ($members as $member): ?>
                 <div class="bg-white rounded-lg shadow-md p-6 text-center team-member-card">
                     <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden bg-gray-200">
-                        <img src="/PBL_LabMMT/public/assets/img/partners/bagus-satya.jpg" alt="Bagus Satya Dian Nugraha" class="w-full h-full object-cover"style="object-position: center 10%;">
+                        <?php if ($member['photo']): ?>
+                        <img src="<?= BASE_URL ?>/assets/img/team/<?= htmlspecialchars($member['photo']) ?>" 
+                             alt="<?= htmlspecialchars($member['name']) ?>" 
+                             class="w-full h-full object-cover" style="object-position: center top;">
+                        <?php else: ?>
+                        <div class="w-full h-full flex items-center justify-center bg-gray-300">
+                            <i class="fas fa-user fa-3x text-gray-500"></i>
+                        </div>
+                        <?php endif; ?>
                     </div>
-                    <h4 class="font-bold text-gray-800 mb-1">Bagus Satya Dian Nugraha, ST., MT.</h4>
-                    <p class="text-blue-600 text-sm">Peneliti</p>
+                    <h4 class="font-bold text-gray-800 mb-1"><?= htmlspecialchars($member['name']) ?></h4>
+                    <p class="text-blue-600 text-sm"><?= htmlspecialchars($member['position']) ?></p>
                 </div>
-
-                <div class="bg-white rounded-lg shadow-md p-6 text-center team-member-card">
-                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden bg-gray-200">
-                        <img src="/PBL_LabMMT/public/assets/img/partners/anugrah-nur.jpg" alt="Anugrah Nur Rahmanto" class="w-full h-full object-cover"style="object-position: center 10%;">
-                    </div>
-                    <h4 class="font-bold text-gray-800 mb-1">Anugrah Nur Rahmanto, S.Sn., M.Ds.</h4>
-                    <p class="text-blue-600 text-sm">Peneliti</p>
-                </div>
-
-                <div class="bg-white rounded-lg shadow-md p-6 text-center team-member-card">
-                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden bg-gray-200">
-                        <img src="/PBL_LabMMT/public/assets/img/partners/muhammad-unggul.jpg" alt="Muhammad Unggul Pamenang" class="w-full h-full object-cover"style="object-position: center 10%;">
-                    </div>
-                    <h4 class="font-bold text-gray-800 mb-1">Muhammad Unggul Pamenang, S.ST., M.T.</h4>
-                    <p class="text-blue-600 text-sm">Peneliti</p>
-                </div>
+                <?php endforeach; ?>
             </div>
+            <?php endif; ?>
         </div>
     </div>
 </section>

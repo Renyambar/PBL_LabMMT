@@ -20,8 +20,14 @@ class HomeController extends Controller
 
     public function about()
     {
+        $labProfileModel = $this->model('LabProfile');
+        $profile = $labProfileModel->getProfile();
+        
         $data = [
-            'title' => 'About - ' . APP_NAME
+            'title' => 'About - ' . APP_NAME,
+            'profile' => $profile,
+            'missions' => $profile ? json_decode($profile['mission'], true) : [],
+            'team_members' => $labProfileModel->getTeamMembers()
         ];
 
         $this->view('home/about', $data);

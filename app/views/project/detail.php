@@ -5,7 +5,7 @@
     <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
             <!-- Back Button -->
-            <a href="<?= BASE_URL ?>/project" class="text-blue-600 hover:text-blue-700 mb-6 inline-block">
+            <a href="<?= BASE_URL ?>/project" class="text-blue-600 hover:text-blue-700 mb-6 inline-block" data-aos="fade-right">
                 <i class="fas fa-arrow-left mr-2"></i>Kembali ke Proyek
             </a>
 
@@ -25,7 +25,7 @@
             <?php endif; ?>
 
             <!-- Project Header -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8" data-aos="zoom-in">
                 <div class="h-96 bg-gray-300">
                     <?php if ($project['thumbnail']): ?>
                         <img src="<?= BASE_URL ?>/assets/img/<?= $project['thumbnail'] ?>" alt="<?= $project['title'] ?>" class="w-full h-full object-cover">

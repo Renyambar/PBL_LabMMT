@@ -2,7 +2,7 @@
 
 <!-- Page Header -->
 <section class="bg-gradient-to-r from-black/100 via-blue-800 to-blue-600 text-white py-16">
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto px-4" data-aos="fade-down">
         <h1 class="text-4xl font-bold mb-4">Hubungi Kami</h1>
         <p class="text-xl">Kami siap membantu dan menjawab pertanyaan Anda</p>
     </div>
@@ -14,7 +14,7 @@
         <div class="max-w-6xl mx-auto">
             <!-- Contact Info Cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition">
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition" data-aos="flip-up" data-aos-delay="0">
                     <div class="bg-gradient-to-br from-primary to-secondary text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-map-marker-alt text-2xl"></i>
                     </div>
@@ -24,7 +24,7 @@
                     Jl. Soekarno Hatta No.9, Malang</p>
                 </div>
 
-                <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition">
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition" data-aos="flip-up" data-aos-delay="100">
                     <div class="bg-gradient-to-br from-primary to-secondary text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-phone text-2xl"></i>
                     </div>
@@ -34,7 +34,7 @@
                     Ext. 1234</p>
                 </div>
 
-                <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition">
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition" data-aos="flip-up" data-aos-delay="200">
                     <div class="bg-gradient-to-br from-primary to-secondary text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-envelope text-2xl"></i>
                     </div>
@@ -44,11 +44,11 @@
                     &nbsp;</p>
                 </div>
 
-                <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition">
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition" data-aos="flip-up" data-aos-delay="300">
                     <div class="bg-gradient-to-br from-primary to-secondary text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-clock text-2xl"></i>
                     </div>
-                    <h4 class="font-semibold text-lg mb-2">Jam Operasional</h4>
+                    <h4 class="font-semibold text-lg mb-4">Jam Operasional</h4>
                     <p class="text-gray-600 text-sm">Senin - Jumat<br>
                     08:00 - 17:00 WIB<br>
                     Sabtu: 08:00 - 14:00</p>
@@ -58,7 +58,7 @@
             <!-- Detailed Info & Social Media -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
                 <!-- Tentang Lab MMT -->
-                <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-8">
+                <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-8" data-aos="fade-right">
                     <h2 class="text-2xl font-bold mb-4 flex items-center">
                         <i class="fas fa-info-circle text-primary mr-3"></i>
                         Tentang Lab MMT

@@ -51,8 +51,8 @@ class ProjectComment
     // Get comment count for a project
     public function getCommentCount($project_id)
     {
-        $query = "SELECT get_project_comment_count(:project_id) as count";
-        $result = $this->db->fetch($query, ['project_id' => $project_id]);
+        $query = "SELECT get_project_comment_count($1) as count";
+        $result = $this->db->fetch($query, [$project_id]);
         return $result['count'] ?? 0;
     }
 
@@ -62,16 +62,17 @@ class ProjectComment
         // Set default values for optional fields
         $contributor_name = !empty($data['contributor_name']) ? $data['contributor_name'] : 'Anonymous';
         $contributor_email = !empty($data['contributor_email']) ? $data['contributor_email'] : null;
+        $is_approved = isset($data['is_approved']) && $data['is_approved'] === true ? 'true' : 'false';
 
         $query = "INSERT INTO project_comments (project_id, user_id, contributor_name, contributor_email, comment, is_approved) 
-                  VALUES (:project_id, :user_id, :contributor_name, :contributor_email, :comment, :is_approved)";
+                  VALUES (:project_id, :user_id, :contributor_name, :contributor_email, :comment, :is_approved::boolean)";
         $params = [
             'project_id' => $data['project_id'],
             'user_id' => $data['user_id'] ?? null,
             'contributor_name' => $contributor_name,
             'contributor_email' => $contributor_email,
             'comment' => $data['comment'],
-            'is_approved' => $data['is_approved'] ?? false
+            'is_approved' => $is_approved
         ];
         return $this->db->execute($query, $params);
     }

@@ -22,7 +22,7 @@ $hasMore = $totalArticles > $articlesPerPage;
 
 <!-- Page Header -->
 <section class="bg-gradient-to-r from-black/100 via-blue-800 to-blue-600 text-white py-16">
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto px-4" data-aos="fade-down">
         <h1 class="text-4xl font-bold mb-4">Artikel & Publikasi Ilmiah</h1>
         <p class="text-xl">Update kegiatan dan publikasi ilmiah Lab MMT</p>
     </div>
@@ -31,7 +31,7 @@ $hasMore = $totalArticles > $articlesPerPage;
 <!-- Search Section -->
 <section class="py-8 bg-gray-50">
     <div class="container mx-auto px-4">
-        <form action="<?= BASE_URL ?>/article" method="GET" class="flex max-w-2xl mx-auto">
+        <form action="<?= BASE_URL ?>/article" method="GET" class="flex max-w-2xl mx-auto" data-aos="zoom-in">
             <input type="text" name="search" placeholder="Cari artikel..."
                    value="<?= $search ?? '' ?>"
                    class="px-4 py-3 border border-gray-300 rounded-l-lg focus:ring-blue-600 flex-1">
@@ -50,8 +50,8 @@ $hasMore = $totalArticles > $articlesPerPage;
 
             <!-- GRID: responsive 1 / 2 / 3 kolom -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <?php foreach ($articlesToShow as $article): ?>
-                    <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 hover:-translate-y-1">
+                <?php foreach ($articlesToShow as $index => $article): ?>
+                    <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 hover:-translate-y-1" data-aos="fade-up" data-aos-delay="<?= $index * 100 ?>">
 
                         <!-- Image-->
                         <div class="h-48 relative overflow-hidden bg-gray-200">
