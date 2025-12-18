@@ -22,7 +22,11 @@
                         </p>
                     </div>
                     <div class="md:w-1/2">
-                        <img src="/PBL_LabMMT/public/assets/img/partners/lab-team.jpg" alt="Lab Team" class="w-full h-full object-cover">
+                        <?php if (!empty($data['profile']['thumbnail'])): ?>
+                            <img src="<?= BASE_URL ?>/assets/img/lab/<?= htmlspecialchars($data['profile']['thumbnail']) ?>" alt="Lab Profile" class="w-full h-full object-cover">
+                        <?php else: ?>
+                            <img src="<?= BASE_URL ?>/assets/img/partners/lab-team.jpg" alt="Lab Team" class="w-full h-full object-cover">
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

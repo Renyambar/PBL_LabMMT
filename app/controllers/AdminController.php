@@ -70,9 +70,23 @@ class AdminController extends Controller
     // Manage Gallery
     public function gallery()
     {
+        $search = $_GET['search'] ?? '';
+        $type = $_GET['type'] ?? '';
+        
+        // Tentukan data galeri berdasarkan filter
+        if (!empty($search) && !empty($type)) {
+            $galleries = $this->galleryModel->searchByTypeAndKeyword($type, $search);
+        } elseif (!empty($search)) {
+            $galleries = $this->galleryModel->search($search);
+        } elseif (!empty($type)) {
+            $galleries = $this->galleryModel->getByType($type);
+        } else {
+            $galleries = $this->galleryModel->getAll();
+        }
+        
         $data = [
             'title' => 'Manage Gallery - ' . APP_NAME,
-            'galleries' => $this->galleryModel->getAll()
+            'galleries' => $galleries
         ];
 
         $this->view('admin/gallery', $data);
@@ -91,7 +105,7 @@ class AdminController extends Controller
         $this->view('admin/partners', $data);
     }
 
-    // Manage Users (admin only)
+    // Manage Users 
     public function users()
     {
         $this->requireAdmin();
@@ -405,7 +419,7 @@ class AdminController extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($_POST['password'] !== $_POST['password_confirmation']) {
-                $_SESSION['error'] = 'Passwords do not match';
+                $_SESSION['error'] = 'Password tidak cocok';
                 $this->redirect('admin/users/create');
                 return;
             }
@@ -418,9 +432,9 @@ class AdminController extends Controller
             ];
 
             if ($this->userModel->create($data)) {
-                $_SESSION['message'] = 'User created successfully!';
+                $_SESSION['message'] = 'Pengguna berhasil ditambahkan!';
             } else {
-                $_SESSION['error'] = 'Failed to create user';
+                $_SESSION['error'] = 'Gagal menambahkan pengguna';
             }
         }
         $this->redirect('admin/users');
@@ -591,9 +605,9 @@ class AdminController extends Controller
     public function comments_approve($id)
     {
         if ($this->commentModel->approve($id)) {
-            $_SESSION['message'] = 'Comment approved successfully!';
+            $_SESSION['message'] = 'Komentar disetujui!';
         } else {
-            $_SESSION['error'] = 'Failed to approve comment';
+            $_SESSION['error'] = 'Gagal menyetujui komentar';
         }
         $this->redirect('admin/comments');
     }
@@ -601,9 +615,9 @@ class AdminController extends Controller
     public function comments_unapprove($id)
     {
         if ($this->commentModel->unapprove($id)) {
-            $_SESSION['message'] = 'Comment unapproved!';
+            $_SESSION['message'] = 'Komentar tidak disetujui!';
         } else {
-            $_SESSION['error'] = 'Failed to unapprove comment';
+            $_SESSION['error'] = 'Gagal tidak menyetujui komentar';
         }
         $this->redirect('admin/comments');
     }
@@ -846,6 +860,19 @@ class AdminController extends Controller
                 'vision' => trim($_POST['vision']),
                 'mission' => json_encode(array_values($missions))
             ];
+
+            // Handle thumbnail upload
+            if (isset($_FILES['thumbnail']) && $_FILES['thumbnail']['error'] == 0) {
+                $upload = $this->uploadFile($_FILES['thumbnail'], 'lab/');
+                if ($upload['success']) {
+                    // Delete old thumbnail if exists
+                    if (!empty($profile['thumbnail']) && file_exists('../public/assets/img/lab/' . $profile['thumbnail'])) {
+                        unlink('../public/assets/img/lab/' . $profile['thumbnail']);
+                    }
+                    // Extract just the filename without the 'lab/' prefix
+                    $data['thumbnail'] = basename($upload['filename']);
+                }
+            }
 
             if ($this->labProfileModel->update($data)) {
                 $_SESSION['success'] = 'Profil lab berhasil diupdate!';

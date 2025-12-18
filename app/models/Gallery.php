@@ -72,4 +72,26 @@ class Gallery
         $query = "DELETE FROM galleries WHERE id = :id";
         return $this->db->execute($query, ['id' => $id]);
     }
+
+    // Search galleries
+    public function search($keyword)
+    {
+        $query = "SELECT * FROM galleries 
+                  WHERE title LIKE :keyword OR description LIKE :keyword 
+                  ORDER BY created_at DESC";
+        return $this->db->fetchAll($query, ['keyword' => '%' . $keyword . '%']);
+    }
+
+    // Search galleries by type and keyword
+    public function searchByTypeAndKeyword($media_type, $keyword)
+    {
+        $query = "SELECT * FROM galleries 
+                  WHERE media_type = :media_type 
+                  AND (title LIKE :keyword OR description LIKE :keyword) 
+                  ORDER BY created_at DESC";
+        return $this->db->fetchAll($query, [
+            'media_type' => $media_type,
+            'keyword' => '%' . $keyword . '%'
+        ]);
+    }
 }

@@ -19,19 +19,38 @@ class LabProfile
     // Update lab profile
     public function update($data)
     {
-        $query = "UPDATE lab_profile SET 
-                  description = :description,
-                  vision = :vision,
-                  mission = :mission,
-                  updated_at = CURRENT_TIMESTAMP
-                  WHERE id = :id";
-        
-        $params = [
-            'id' => $data['id'],
-            'description' => $data['description'],
-            'vision' => $data['vision'],
-            'mission' => $data['mission'] // JSON string
-        ];
+        // Build query dynamically based on whether thumbnail is provided
+        if (isset($data['thumbnail'])) {
+            $query = "UPDATE lab_profile SET 
+                      description = :description,
+                      vision = :vision,
+                      mission = :mission,
+                      thumbnail = :thumbnail,
+                      updated_at = CURRENT_TIMESTAMP
+                      WHERE id = :id";
+            
+            $params = [
+                'id' => $data['id'],
+                'description' => $data['description'],
+                'vision' => $data['vision'],
+                'mission' => $data['mission'],
+                'thumbnail' => $data['thumbnail']
+            ];
+        } else {
+            $query = "UPDATE lab_profile SET 
+                      description = :description,
+                      vision = :vision,
+                      mission = :mission,
+                      updated_at = CURRENT_TIMESTAMP
+                      WHERE id = :id";
+            
+            $params = [
+                'id' => $data['id'],
+                'description' => $data['description'],
+                'vision' => $data['vision'],
+                'mission' => $data['mission'] // JSON string
+            ];
+        }
         
         return $this->db->execute($query, $params);
     }

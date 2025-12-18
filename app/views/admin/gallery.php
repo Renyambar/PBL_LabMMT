@@ -7,18 +7,30 @@
     </a>
 </div>
 
-<!-- Filter -->
+<!-- Filter & Search -->
 <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
     <form method="GET" class="flex gap-4">
-        <select name="type" class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+        <input type="text" 
+               name="search" 
+               placeholder="Cari berdasarkan judul atau deskripsi..." 
+               value="<?= htmlspecialchars($_GET['search'] ?? '') ?>"
+               class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+        
+        <select name="type" class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
             <option value="">Semua Jenis Media</option>
             <option value="image" <?= (($_GET['type'] ?? '') == 'image') ? 'selected' : '' ?>>Gambar</option>
             <option value="video" <?= (($_GET['type'] ?? '') == 'video') ? 'selected' : '' ?>>Video</option>
         </select>
         
         <button type="submit" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-blue-700">
-            <i class="fas fa-filter mr-2"></i>Filter
+            <i class="fas fa-search mr-2"></i>Cari
         </button>
+        
+        <?php if (!empty($_GET['search']) || !empty($_GET['type'])): ?>
+        <a href="<?= BASE_URL ?>/admin/gallery" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600">
+            <i class="fas fa-times mr-2"></i>Reset
+        </a>
+        <?php endif; ?>
     </form>
 </div>
 

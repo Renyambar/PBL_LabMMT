@@ -1,4 +1,3 @@
-// Custom JavaScript for Lab MMT Portal
 
 // Mobile menu toggle
 document.addEventListener('DOMContentLoaded', function() {
