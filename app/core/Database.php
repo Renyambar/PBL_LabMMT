@@ -11,11 +11,21 @@ class Database
 
     public function __construct()
     {
-        $this->host = DB_HOST;
-        $this->db_name = DB_NAME;
-        $this->username = DB_USER;
-        $this->password = DB_PASS;
-        $this->port = DB_PORT;
+        $databaseUrl = getenv('DATABASE_URL') ?: getenv('POSTGRES_URL');
+        if ($databaseUrl) {
+            $parsed = parse_url($databaseUrl);
+            $this->host = $parsed['host'] ?? DB_HOST;
+            $this->port = (string)($parsed['port'] ?? DB_PORT ?? '5432');
+            $this->username = isset($parsed['user']) ? urldecode($parsed['user']) : DB_USER;
+            $this->password = isset($parsed['pass']) ? urldecode($parsed['pass']) : DB_PASS;
+            $this->db_name = isset($parsed['path']) ? ltrim($parsed['path'], '/') : DB_NAME;
+        } else {
+            $this->host = DB_HOST;
+            $this->db_name = DB_NAME;
+            $this->username = DB_USER;
+            $this->password = DB_PASS;
+            $this->port = DB_PORT;
+        }
 
         // Connect SEKALI saja
         $this->connect();
