@@ -1,0 +1,15 @@
+# Configuration
+config/config.php
+.env
+*.env
+
+# Temporary & backup files
+*.bak
+*.tmp
+*.log
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
