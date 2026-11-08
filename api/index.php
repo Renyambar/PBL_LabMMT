@@ -14,3 +14,4 @@ if (!isset($_GET['url']) && isset($_SERVER['REQUEST_URI'])) {
 
 // Teruskan ke public/index.php
 require __DIR__ . '/../public/index.php';
+
